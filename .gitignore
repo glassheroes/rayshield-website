@@ -1,0 +1,15 @@
+# Logs
+server.log
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Node (ถ้ามีในอนาคต)
+node_modules/

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>บทความ | Ray-Shield</title>
+  <script>/* RS Tag Loader */(function(){try{var c=JSON.parse(localStorage.getItem('rs_site_tags')||'{}'),h=document.head;function sc(src,code){var s=document.createElement('script');if(src){s.src=src;s.async=true;}if(code)s.textContent=code;h.appendChild(s);}function mt(n,v,p){if(!v)return;var e=document.querySelector(p?'meta[property="'+n+'"]':'meta[name="'+n+'"]');if(!e){e=document.createElement('meta');if(p)e.setAttribute('property',n);else e.setAttribute('name',n);h.appendChild(e);}e.setAttribute('content',v);}if(c.meta){mt('description',c.meta.description);mt('keywords',c.meta.keywords);mt('robots',c.meta.robots);mt('og:title',c.meta.ogTitle,1);mt('og:description',c.meta.ogDesc,1);mt('og:image',c.meta.ogImage,1);}if(c.gtm&&c.gtm.enabled&&c.gtm.id){sc(null,'(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","'+c.gtm.id+'");');}if(c.ga4&&c.ga4.enabled&&c.ga4.id){sc('https://www.googletagmanager.com/gtag/js?id='+c.ga4.id);sc(null,'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","'+c.ga4.id+'");');}if(c.gads&&c.gads.enabled&&c.gads.id){if(!(c.ga4&&c.ga4.enabled)){sc('https://www.googletagmanager.com/gtag/js?id='+c.gads.id);sc(null,'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());');}sc(null,'gtag("config","'+c.gads.id+'");'+(c.gads.label?'gtag("event","conversion",{"send_to":"'+c.gads.id+'/'+c.gads.label+'"});':''));}if(c.fbpixel&&c.fbpixel.enabled&&c.fbpixel.id){sc(null,'!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","'+c.fbpixel.id+'");fbq("track","PageView");');}if(c.linetag&&c.linetag.enabled&&c.linetag.id){sc(null,'(function(g,d,o){g._ltq=g._ltq||[];g._lt=g._lt||function(){g._ltq.push(arguments)};var h=location.protocol==="https:"?"https://d.line-scdn.net":"http://d.line-scdn.net";var s=d.createElement("script");s.async=1;s.src=h+"/n/line_tag/public/release/v1/lt.min.js";var t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t)})(window,document);_lt("init",{customerType:"lap",tagId:"'+c.linetag.id+'"});_lt("send","pv",["'+c.linetag.id+'"]);');}if(c.customHead){var d=document.createElement('div');d.innerHTML=c.customHead;while(d.firstChild)h.appendChild(d.firstChild);}if(c.customBody){document.addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.innerHTML=c.customBody;document.body.appendChild(d);});}}catch(e){}})();</script>
+  <script>/* RS Favicon Loader */(function(){try{var f=localStorage.getItem('rs_site_favicon');if(f){var l=document.querySelector('link[rel~="icon"]');if(!l){l=document.createElement('link');l.rel='icon';document.head.appendChild(l);}l.href=f;}}catch(e){}})();</script>
+  <script>/* RS Visit Tracker */(function(){try{var K='rs_visits',today=new Date().toISOString().split('T')[0];var p=(location.pathname.split('/').pop()||'index').replace('.html','')||'index';var w=window.innerWidth,dv=w<768?'m':w<1024?'t':'d';var ref=document.referrer,r='d';if(ref){if(/google|bing|yahoo|baidu/i.test(ref))r='s';else if(/facebook|instagram|twitter|x\.com|line|tiktok/i.test(ref))r='sc';else r='o';}var a=JSON.parse(localStorage.getItem(K)||'[]');a.push({d:today,p:p,dv:dv,r:r});var cut=new Date();cut.setDate(cut.getDate()-93);localStorage.setItem(K,JSON.stringify(a.filter(function(v){return v.d>=cut.toISOString().split('T')[0];})));}catch(e){}})();</script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#050d1f; --cyan:#00b4d8; --gold:#f4a940; --text:#e8eaf0; }
+    body { font-family: 'Prompt', sans-serif; background: var(--navy); color: var(--text); line-height: 1.6; }
+    /* NAVBAR */
+    nav { position: sticky; top:0; z-index:100; background: rgba(5,13,31,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.08); }
+    .nav-container { max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:68px; }
+    .nav-logo { display:flex; align-items:center; background:#fff; padding:5px 14px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.25); text-decoration:none; }
+    .nav-logo img { height:36px; width:auto; }
+    .back-link { color:var(--cyan); text-decoration:none; font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:6px; padding:8px 16px; border-radius:50px; border:1px solid rgba(0,180,216,0.3); transition:all .2s; }
+    .back-link:hover { background:rgba(0,180,216,0.1); }
+
+    /* ARTICLE */
+    .article-wrap { max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; }
+    .article-breadcrumb { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:rgba(255,255,255,0.4); margin-bottom:28px; }
+    .article-breadcrumb a { color:var(--cyan); text-decoration:none; }
+    .article-breadcrumb a:hover { text-decoration:underline; }
+    .article-cat-badge {
+      display:inline-block; background:rgba(0,180,216,0.15); border:1px solid rgba(0,180,216,0.3);
+      color:var(--cyan); padding:4px 14px; border-radius:50px; font-size:0.78rem; font-weight:700;
+      margin-bottom:18px;
+    }
+    .article-heading { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight:900; color:#fff; line-height:1.3; margin-bottom:18px; }
+    .article-meta { display:flex; flex-wrap:wrap; align-items:center; gap:16px; color:rgba(255,255,255,0.45); font-size:0.82rem; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:36px; }
+    .article-thumb-main {
+      width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden;
+      background: linear-gradient(135deg,#0a1628,#1a3a6e);
+      display:flex; align-items:center; justify-content:center; font-size:6rem;
+      margin-bottom:36px;
+    }
+    .article-thumb-main img { width:100%; height:100%; object-fit:cover; }
+    .article-content { font-size:1.02rem; line-height:1.85; color:rgba(255,255,255,0.82); font-family:'Prompt',sans-serif; }
+    .article-content * { font-family: inherit !important; }
+    .article-content h2 { font-size:1.3rem; font-weight:800; color:#fff; margin:32px 0 14px; }
+    .article-content h3 { font-size:1.1rem; font-weight:700; color:var(--cyan); margin:24px 0 10px; }
+    .article-content p { margin-bottom:18px; }
+    .article-content strong { color:#fff; font-weight:700; }
+    .article-content ul, .article-content ol { padding-left:22px; margin-bottom:18px; display:flex; flex-direction:column; gap:8px; }
+    .article-content li { color:rgba(255,255,255,0.78); }
+    .article-content br { display:block; content:''; margin-bottom:6px; }
+
+    /* NOT FOUND */
+    .not-found { text-align:center; padding:80px 24px; }
+    .not-found .icon { font-size:4rem; margin-bottom:16px; }
+    .not-found h2 { font-size:1.4rem; font-weight:800; margin-bottom:10px; }
+    .not-found p { color:rgba(255,255,255,0.5); margin-bottom:28px; }
+
+    /* CTA */
+    .article-cta {
+      margin-top:48px; background:linear-gradient(135deg,rgba(0,180,216,0.12),rgba(0,119,182,0.08));
+      border:1px solid rgba(0,180,216,0.25); border-radius:20px; padding:32px; text-align:center;
+    }
+    .article-cta h3 { font-size:1.1rem; font-weight:800; margin-bottom:8px; }
+    .article-cta p { color:rgba(255,255,255,0.6); font-size:0.9rem; margin-bottom:20px; }
+    .btn-cta { display:inline-flex; align-items:center; gap:8px; background:var(--cyan); color:var(--navy); padding:12px 28px; border-radius:50px; font-weight:700; text-decoration:none; transition:background .2s; }
+    .btn-cta:hover { background:#00d4f5; }
+
+    footer { background:#020810; border-top:1px solid rgba(255,255,255,0.06); padding:32px 24px; text-align:center; color:rgba(255,255,255,0.35); font-size:0.82rem; }
+    footer a { color:var(--cyan); text-decoration:none; }
+
+    /* ── IMAGE ZOOM ── */
+    .img-zoomable {
+      display: block; position: relative; cursor: zoom-in;
+      border-radius: 12px; overflow: hidden; margin: 14px 0;
+      transition: box-shadow .25s;
+    }
+    .img-zoomable:hover {
+      box-shadow: 0 0 0 2px var(--cyan), 0 10px 36px rgba(0,180,216,0.2);
+    }
+    .img-zoomable img {
+      display: block; max-width: 100%; border-radius: 12px;
+      transition: transform .3s ease; margin: 0 !important;
+    }
+    .img-zoomable:hover img { transform: scale(1.015); }
+    .img-zoom-badge {
+      position: absolute; bottom: 10px; right: 10px;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; padding: 4px 10px;
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; color: rgba(255,255,255,0.85);
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .2s, transform .2s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .img-zoomable:hover .img-zoom-badge { opacity: 1; transform: translateY(0); }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 20px; gap: 14px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s, background .25s;
+    }
+    #lightbox.open {
+      opacity: 1; pointer-events: all;
+      background: rgba(2,8,16,0.94);
+    }
+    #lightbox-img-wrap {
+      position: relative; display: flex;
+      align-items: center; justify-content: center;
+      max-width: min(92vw, 1100px); max-height: 82vh;
+    }
+    #lightbox-img {
+      max-width: 100%; max-height: 82vh;
+      border-radius: 14px;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
+      object-fit: contain; display: block;
+      transform: scale(0.88); opacity: 0;
+      transition: transform .32s cubic-bezier(0.34,1.42,0.64,1), opacity .25s;
+      cursor: zoom-out;
+    }
+    #lightbox.open #lightbox-img { transform: scale(1); opacity: 1; }
+    #lightbox-caption {
+      color: rgba(255,255,255,0.45); font-size: 0.82rem;
+      text-align: center; max-width: 600px;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity .3s .1s, transform .3s .1s;
+    }
+    #lightbox.open #lightbox-caption { opacity: 1; transform: translateY(0); }
+    #lightbox-close {
+      position: fixed; top: 18px; right: 18px;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .2s; z-index: 10000;
+    }
+    #lightbox-close:hover { background: rgba(255,255,255,0.22); transform: scale(1.1); }
+    #lightbox-hint {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.25); font-size: 0.75rem;
+      pointer-events: none; white-space: nowrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-container { padding: 0 16px; }
+      .back-link { font-size: 0.82rem; padding: 7px 14px; }
+      .article-wrap { padding: 32px 16px 56px; }
+      .article-heading { font-size: clamp(1.35rem, 5.5vw, 1.85rem); margin-bottom: 14px; }
+      .article-meta { gap: 10px; margin-bottom: 22px; padding-bottom: 18px; }
+      .article-thumb-main { margin-bottom: 24px; border-radius: 12px; font-size: 4rem; }
+      .article-content { font-size: 0.97rem; line-height: 1.8; }
+      .article-content h2 { font-size: 1.15rem; margin: 24px 0 10px; }
+      .article-content h3 { font-size: 1rem; margin: 18px 0 8px; }
+      .article-content ul, .article-content ol { padding-left: 18px; }
+      .article-cta { padding: 24px 20px; margin-top: 36px; border-radius: 16px; }
+      .article-cta h3 { font-size: 1rem; }
+      .article-cta p { font-size: 0.86rem; }
+      /* Lightbox mobile */
+      #lightbox { padding: 12px; gap: 10px; }
+      #lightbox-img { max-height: 74vh; border-radius: 10px; }
+      #lightbox-hint { font-size: 0.68rem; bottom: 10px; }
+      #lightbox-close { top: 10px; right: 10px; width: 38px; height: 38px; font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-container { padding: 0 14px; }
+      .nav-logo { padding: 4px 10px; }
+      .nav-logo img { height: 30px; }
+      .back-link { font-size: 0.78rem; padding: 6px 12px; }
+      .article-wrap { padding: 24px 14px 48px; }
+      .article-heading { font-size: clamp(1.25rem, 6.5vw, 1.6rem); }
+      .article-breadcrumb { font-size: 0.74rem; gap: 6px; margin-bottom: 20px; }
+      .article-meta { flex-direction: column; align-items: flex-start; gap: 5px; font-size: 0.76rem; }
+      .article-cat-badge { font-size: 0.72rem; padding: 3px 11px; margin-bottom: 14px; }
+      .article-content { font-size: 0.94rem; }
+      .article-cta { padding: 20px 16px; }
+      .btn-cta { padding: 11px 22px; font-size: 0.88rem; width: 100%; justify-content: center; }
+      #lightbox-img { max-height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Ray-Shield" /></a>
+      <a href="articles.html" class="back-link">← กลับหน้าบทความ</a>
+    </div>
+  </nav>
+
+  <div class="article-wrap" id="articleWrap">
+    <div style="text-align:center;padding:60px 0;color:rgba(255,255,255,0.4);">⏳ กำลังโหลด...</div>
+  </div>
+
+  <footer>
+    <p>© 2026 Ray-Shield Nano Ceramic Film · <a href="index.html">หน้าหลัก</a> · โทร <a href="tel:029435900">02-9435900</a> · Line <a href="https://line.me/ti/p/~@glassheroes" target="_blank">@glassheroes</a></p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="ดูรูปภาพขนาดเต็ม">
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="ปิด">✕</button>
+    <div id="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="" onclick="closeLightbox()" />
+    </div>
+    <div id="lightbox-caption"></div>
+    <div id="lightbox-hint">คลิกที่รูป · กด ESC เพื่อปิด</div>
+  </div>
+
+  <script>
+    const KEY = 'rs_articles';
+    function getArticles() {
+      try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; }
+    }
+    function escHtml(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    const params    = new URLSearchParams(location.search);
+    const idParam   = params.get('id');
+    const slugParam = params.get('slug');
+    const wrap = document.getElementById('articleWrap');
+
+    if (!idParam && !slugParam) {
+      wrap.innerHTML = `<div class="not-found"><div class="icon">🔍</div><h2>ไม่พบบทความ</h2><p>ไม่ได้ระบุ ID หรือ Slug บทความ</p><a href="articles.html" class="btn-cta">← ดูบทความทั้งหมด</a></div>`;
+    } else {
+      const now = new Date();
+      function isAccessible(a) {
+        return a.status === 'published' ||
+          (a.status === 'scheduled' && a.scheduledAt && new Date(a.scheduledAt) <= now) ||
+          a.status === 'draft';
+      }
+      const article = getArticles().find(a => {
+        if (slugParam) return a.slug === slugParam && isAccessible(a);
+        return a.id === idParam && isAccessible(a);
+      });
+      if (!article) {
+        wrap.innerHTML = `<div class="not-found"><div class="icon">📭</div><h2>ไม่พบบทความนี้</h2><p>อาจถูกลบหรือยังไม่เผยแพร่</p><a href="articles.html" class="btn-cta">← ดูบทความทั้งหมด</a></div>`;
+      } else {
+        document.title = `${article.title} | Ray-Shield`;
+        const isEmoji = article.thumb && !article.thumb.includes('/') && article.thumb.length <= 4;
+        const thumbHtml = isEmoji
+          ? `<div class="article-thumb-main">${article.thumb}</div>`
+          : `<div class="article-thumb-main"><img src="${escHtml(article.thumb)}" alt="${escHtml(article.title)}" onerror="this.parentElement.innerHTML='📄'" /></div>`;
+
+        wrap.innerHTML = `
+          <div class="article-breadcrumb">
+            <a href="index.html">หน้าแรก</a> / <a href="articles.html">บทความ</a> / <span>${escHtml(article.cat)}</span>
+          </div>
+          <span class="article-cat-badge">${escHtml(article.cat)}</span>
+          <h1 class="article-heading">${escHtml(article.title)}</h1>
+          <div class="article-meta">
+            <span>📅 ${article.updatedAt || article.createdAt || ''}</span>
+            <span>⏱️ อ่าน ${escHtml(article.time)} นาที</span>
+          </div>
+          ${thumbHtml}
+          <div class="article-content">${article.content || `<p>${escHtml(article.excerpt)}</p>`}</div>
+          <div class="article-cta">
+            <h3>สนใจติดตั้งฟิล์มกรองแสง Ray-Shield?</h3>
+            <p>ช่างผู้เชี่ยวชาญกว่า 38 ปี · รับประกัน 8 ปีเต็ม · 8 สาขาทั่วกรุงเทพฯ และปริมณฑล</p>
+            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" class="btn-cta">📅 จองคิวเข้ารับบริการ</a>
+          </div>
+        `;
+        // init lightbox after content rendered
+        initLightbox();
+      }
+    }
+
+    // ── LIGHTBOX ──
+    function initLightbox() {
+      document.querySelectorAll('.article-content img').forEach(img => {
+        // skip if already wrapped
+        if (img.closest('.img-zoomable')) return;
+
+        const wrap = document.createElement('span');
+        wrap.className = 'img-zoomable';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+
+        const badge = document.createElement('span');
+        badge.className = 'img-zoom-badge';
+        badge.innerHTML = '🔍 ขยายรูป';
+        wrap.appendChild(badge);
+
+        wrap.addEventListener('click', () => openLightbox(img.src, img.alt));
+      });
+    }
+
+    function openLightbox(src, alt) {
+      const lb  = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      img.src = src;
+      img.alt = alt || '';
+      cap.textContent = alt && alt !== 'article-image' ? alt : '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lb  = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      // reset src after animation
+      setTimeout(() => { img.src = ''; }, 300);
+    }
+
+    // ESC key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // click overlay (not image)
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this || e.target.id === 'lightbox-img-wrap') closeLightbox();
+    });
+  </script>
+</body>
+</html>
