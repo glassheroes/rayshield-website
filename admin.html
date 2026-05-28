@@ -606,11 +606,18 @@
     <div class="logo"><img src="images/logo.png" alt="Ray-Shield" onerror="this.style.display='none'" /></div>
     <h2>🔐 เข้าสู่ระบบหลังบ้าน</h2>
     <p>Ray-Shield Admin · จัดการเว็บไซต์</p>
-    <div class="form-group">
-      <input type="password" id="pwInput" placeholder="รหัสผ่าน" onkeydown="if(event.key==='Enter')doLogin()" />
+    <div class="form-group" style="position:relative;">
+      <input type="password" id="pwInput" placeholder="รหัสผ่าน" onkeydown="if(event.key==='Enter')doLogin()"
+        style="padding-right:44px;" />
+      <button type="button" onclick="togglePwShow()" id="pwShowBtn"
+        style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.1rem;color:rgba(255,255,255,0.5);padding:4px;">👁️</button>
+    </div>
+    <div id="lockMsg" style="display:none;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:12px 16px;margin-bottom:12px;font-size:0.85rem;color:#fca5a5;text-align:left;">
+      🔒 <strong>ล็อคชั่วคราว</strong> — พิมพ์รหัสผิดเกินกำหนด<br>
+      <span id="lockCountdown" style="font-size:0.8rem;opacity:0.8;"></span>
     </div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="doLogin()">🔑 เข้าสู่ระบบ</button>
-    <div class="login-err" id="loginErr">❌ รหัสผ่านไม่ถูกต้อง</div>
+    <div class="login-err" id="loginErr" style="display:none;"></div>
   </div>
 </div>
 
@@ -1300,6 +1307,34 @@
           </div>
         </div>
         <!-- /FAVICON SECTION -->
+
+        <!-- ── PASSWORD SECTION ── -->
+        <div class="settings-section" style="margin-top:24px;">
+          <div class="settings-section-title">🔑 เปลี่ยนรหัสผ่านแอดมิน</div>
+          <p class="settings-section-desc">รหัสผ่านถูกเก็บในเบราว์เซอร์นี้ หากล้าง Browser Data จะกลับเป็นรหัสเริ่มต้น: <code style="background:#0d1a2e;padding:2px 8px;border-radius:4px;font-size:0.85rem;">rayshield@2026</code></p>
+          <div style="display:flex;flex-direction:column;gap:10px;max-width:380px;margin-top:14px;">
+            <div style="position:relative;">
+              <input type="password" id="pwOld" placeholder="รหัสผ่านปัจจุบัน"
+                style="width:100%;padding:10px 44px 10px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;" />
+              <button type="button" onclick="toggleFieldPw(this)"
+                style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;">👁️</button>
+            </div>
+            <div style="position:relative;">
+              <input type="password" id="pwNew" placeholder="รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)"
+                style="width:100%;padding:10px 44px 10px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;" />
+              <button type="button" onclick="toggleFieldPw(this)"
+                style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;">👁️</button>
+            </div>
+            <div style="position:relative;">
+              <input type="password" id="pwNew2" placeholder="ยืนยันรหัสผ่านใหม่"
+                style="width:100%;padding:10px 44px 10px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;" />
+              <button type="button" onclick="toggleFieldPw(this)"
+                style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;">👁️</button>
+            </div>
+            <button class="btn btn-success" onclick="changeAdminPassword()" style="align-self:flex-start;">💾 บันทึกรหัสผ่านใหม่</button>
+          </div>
+        </div>
+        <!-- /PASSWORD SECTION -->
 
       </div>
     </div><!-- /tabSettings -->
@@ -2106,7 +2141,7 @@
 <div id="toast"></div>
 
 <script>
-  const PASS = 'rayshield@2026';
+  const DEFAULT_PASS = 'rayshield@2026';
   const KEY  = 'rs_articles';
   let thumbBase64 = '';
   let savedRange  = null;
@@ -2115,29 +2150,140 @@
   let selectedImg = null;
   let modalImgSize = '50%';
 
-  // ── AUTH ──
+  // ── AUTH CONSTANTS ──
+  const AUTH_PASS_KEY    = 'rs_admin_pwd';    // custom password storage
+  const AUTH_FAIL_KEY    = 'rs_auth_fails';   // { count, until }
+  const AUTH_SESSION_KEY = 'rs_auth';
+  const MAX_FAILS        = 5;
+  const LOCK_MS          = 15 * 60 * 1000;   // 15 นาที
+  const SESSION_TTL_MS   = 2 * 60 * 60 * 1000; // 2 ชั่วโมง
+  let _lockTimer = null;
+
+  function getAdminPass() {
+    return localStorage.getItem(AUTH_PASS_KEY) || DEFAULT_PASS;
+  }
+
+  function getLockInfo() {
+    try { return JSON.parse(localStorage.getItem(AUTH_FAIL_KEY) || '{}'); } catch { return {}; }
+  }
+
+  function isLocked() {
+    const lk = getLockInfo();
+    return lk.until && Date.now() < lk.until;
+  }
+
+  function togglePwShow() {
+    const inp = document.getElementById('pwInput');
+    const btn = document.getElementById('pwShowBtn');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    btn.textContent = inp.type === 'password' ? '👁️' : '🙈';
+  }
+
+  function toggleFieldPw(btn) {
+    const inp = btn.previousElementSibling;
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    btn.textContent = inp.type === 'password' ? '👁️' : '🙈';
+  }
+
+  function showLoginErr(msg) {
+    const el = document.getElementById('loginErr');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function startLockCountdown(until) {
+    const cd = document.getElementById('lockCountdown');
+    const lm = document.getElementById('lockMsg');
+    lm.style.display = 'block';
+    clearInterval(_lockTimer);
+    _lockTimer = setInterval(() => {
+      const left = Math.max(0, until - Date.now());
+      const m = Math.floor(left / 60000);
+      const s = Math.floor((left % 60000) / 1000);
+      cd.textContent = `สามารถลองใหม่ได้ในอีก ${m} นาที ${s} วินาที`;
+      if (left <= 0) {
+        clearInterval(_lockTimer);
+        lm.style.display = 'none';
+        localStorage.removeItem(AUTH_FAIL_KEY);
+      }
+    }, 1000);
+  }
+
   function doLogin() {
-    if (document.getElementById('pwInput').value === PASS) {
-      sessionStorage.setItem('rs_auth','1');
+    // ตรวจสอบการล็อค
+    const lk = getLockInfo();
+    if (lk.until && Date.now() < lk.until) {
+      startLockCountdown(lk.until);
+      return;
+    }
+
+    const entered = document.getElementById('pwInput').value;
+    if (entered === getAdminPass()) {
+      // Login สำเร็จ
+      localStorage.removeItem(AUTH_FAIL_KEY);
+      const expiry = Date.now() + SESSION_TTL_MS;
+      sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify({ expiry }));
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminScreen').style.display = 'block';
+      document.getElementById('loginErr').style.display = 'none';
+      document.getElementById('lockMsg').style.display = 'none';
       checkScheduledPublish();
       renderList();
       startScheduleWatcher();
     } else {
-      document.getElementById('loginErr').style.display = 'block';
+      // Login ผิด
       document.getElementById('pwInput').value = '';
+      const fails = (lk.count || 0) + 1;
+      const remaining = MAX_FAILS - fails;
+      if (fails >= MAX_FAILS) {
+        const until = Date.now() + LOCK_MS;
+        localStorage.setItem(AUTH_FAIL_KEY, JSON.stringify({ count: fails, until }));
+        startLockCountdown(until);
+        document.getElementById('loginErr').style.display = 'none';
+      } else {
+        localStorage.setItem(AUTH_FAIL_KEY, JSON.stringify({ count: fails }));
+        showLoginErr(`❌ รหัสผ่านไม่ถูกต้อง (เหลือโอกาสอีก ${remaining} ครั้ง)`);
+      }
     }
   }
+
   function doLogout() {
     clearInterval(schedCheckInterval);
-    sessionStorage.removeItem('rs_auth');
+    sessionStorage.removeItem(AUTH_SESSION_KEY);
     location.reload();
   }
-  if (sessionStorage.getItem('rs_auth')) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminScreen').style.display = 'block';
+
+  function changeAdminPassword() {
+    const old  = (document.getElementById('pwOld')  || {}).value || '';
+    const nw   = (document.getElementById('pwNew')  || {}).value || '';
+    const nw2  = (document.getElementById('pwNew2') || {}).value || '';
+    if (old !== getAdminPass()) { showToast('❌ รหัสผ่านปัจจุบันไม่ถูกต้อง', true); return; }
+    if (nw.length < 6)          { showToast('❌ รหัสผ่านใหม่ต้องมีอย่างน้อย 6 ตัวอักษร', true); return; }
+    if (nw !== nw2)             { showToast('❌ รหัสผ่านใหม่ทั้งสองช่องไม่ตรงกัน', true); return; }
+    localStorage.setItem(AUTH_PASS_KEY, nw);
+    document.getElementById('pwOld').value  = '';
+    document.getElementById('pwNew').value  = '';
+    document.getElementById('pwNew2').value = '';
+    showToast('✅ เปลี่ยนรหัสผ่านเรียบร้อยแล้ว');
   }
+
+  // ── ตรวจสอบ Session เมื่อโหลดหน้า ──
+  (function checkSession() {
+    try {
+      const raw = sessionStorage.getItem(AUTH_SESSION_KEY);
+      if (raw) {
+        const sess = JSON.parse(raw);
+        if (sess.expiry && Date.now() < sess.expiry) {
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('adminScreen').style.display = 'block';
+          return;
+        }
+      }
+    } catch {}
+    // ตรวจสอบการล็อคเมื่อโหลดหน้า login
+    const lk = getLockInfo();
+    if (lk.until && Date.now() < lk.until) startLockCountdown(lk.until);
+  })();
 
   // ── STORAGE ──
   function getArticles() { try { return JSON.parse(localStorage.getItem(KEY))||[]; } catch { return []; } }
