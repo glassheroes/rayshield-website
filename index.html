@@ -165,6 +165,9 @@
       display: none; flex-direction: column; gap: 5px;
       cursor: pointer; padding: 8px; border-radius: 8px;
       transition: background .2s;
+      /* Reset browser <button> defaults */
+      appearance: none; -webkit-appearance: none;
+      background: transparent; border: none; outline: none;
     }
     .hamburger:hover { background: rgba(0,180,216,0.12); }
     .hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; transition: .3s; }
