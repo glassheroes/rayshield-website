@@ -694,6 +694,9 @@
         <button class="sidebar-btn" onclick="switchAdminTab('popup')" id="tabBtnPopup">
           <span class="sb-icon">🎯</span>Pop-up / Banner
         </button>
+        <button class="sidebar-btn" onclick="switchAdminTab('contact')" id="tabBtnContact">
+          <span class="sb-icon">🔗</span>ช่องทางติดต่อ
+        </button>
       </div>
 
       <!-- กลุ่ม: ระบบ -->
@@ -1286,6 +1289,65 @@
     </div><!-- /tabStats -->
 
     <!-- ── TAB: SETTINGS ── -->
+    <!-- ── TAB: CONTACT LINKS ── -->
+    <div id="tabContact" style="display:none;">
+      <div class="panel settings-panel">
+        <div class="panel-title">🔗 ช่องทางติดต่อ</div>
+
+        <div class="settings-section">
+          <div class="settings-section-title">📅 ลิงก์จองคิว</div>
+          <p class="settings-section-desc">ลิงก์นี้จะถูกใช้กับปุ่ม "จองคิว" ทุกปุ่มในเว็บไซต์</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+            <input type="url" id="contactBooking" placeholder="https://..." autocomplete="off"
+              style="width:100%;padding:11px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;outline:none;" />
+            <p style="font-size:0.76rem;color:rgba(255,255,255,0.35);margin:0;">ค่าเริ่มต้น: Google Form / Google Script สำหรับจองคิว</p>
+          </div>
+        </div>
+
+        <div class="settings-section" style="margin-top:20px;">
+          <div class="settings-section-title">💬 ลิงก์ LINE</div>
+          <p class="settings-section-desc">ลิงก์เพิ่มเพื่อน LINE OA — ปุ่มแชทและ footer</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+            <input type="url" id="contactLine" placeholder="https://line.me/ti/p/~@..." autocomplete="off"
+              style="width:100%;padding:11px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;outline:none;" />
+            <p style="font-size:0.76rem;color:rgba(255,255,255,0.35);margin:0;">ค่าเริ่มต้น: https://line.me/ti/p/~@glassheroes</p>
+          </div>
+        </div>
+
+        <div class="settings-section" style="margin-top:20px;">
+          <div class="settings-section-title">📘 ลิงก์ Facebook</div>
+          <p class="settings-section-desc">ลิงก์ Facebook Page — ปุ่ม Facebook ใน footer</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+            <input type="url" id="contactFacebook" placeholder="https://www.facebook.com/..." autocomplete="off"
+              style="width:100%;padding:11px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;outline:none;" />
+            <p style="font-size:0.76rem;color:rgba(255,255,255,0.35);margin:0;">ค่าเริ่มต้น: https://www.facebook.com/glasstechautomotive</p>
+          </div>
+        </div>
+
+        <div class="settings-section" style="margin-top:20px;">
+          <div class="settings-section-title">📞 เบอร์โทรศัพท์</div>
+          <p class="settings-section-desc">เบอร์โทรที่แสดงในเว็บไซต์ ใช้รูปแบบ 02-943-5900 (มีขีด) หรือ 029435900</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+            <input type="tel" id="contactPhone" placeholder="02-943-5900" autocomplete="off"
+              style="width:100%;padding:11px 14px;background:#0d1a2e;border:1px solid #334155;border-radius:10px;color:#e2e8f0;font-family:inherit;font-size:0.9rem;outline:none;" />
+            <p style="font-size:0.76rem;color:rgba(255,255,255,0.35);margin:0;">ค่าเริ่มต้น: 02-943-5900</p>
+          </div>
+        </div>
+
+        <div class="form-actions" style="margin-top:28px;">
+          <button class="btn btn-success" onclick="saveContactLinks()">💾 บันทึกช่องทางติดต่อ</button>
+          <button class="btn btn-ghost" onclick="clearContactLinks()">↩️ คืนค่าเริ่มต้น</button>
+        </div>
+
+        <!-- Preview -->
+        <div id="contactPreview" style="display:none;margin-top:24px;padding:16px;background:rgba(0,180,216,0.06);border:1px solid rgba(0,180,216,0.2);border-radius:12px;">
+          <div style="font-size:0.78rem;font-weight:700;color:var(--cyan);margin-bottom:10px;">✅ ลิงก์ที่บันทึกอยู่</div>
+          <div id="contactPreviewBody" style="font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:2;word-break:break-all;"></div>
+        </div>
+
+      </div>
+    </div><!-- /tabContact -->
+
     <div id="tabSettings" style="display:none;">
       <div class="panel settings-panel">
         <div class="panel-title">⚙️ ตั้งค่าเว็บไซต์</div>
@@ -2929,8 +2991,72 @@
   document.getElementById('imgModal').addEventListener('click', function(e) { if (e.target===this) closeImgModal(); });
 
   // ── ADMIN TAB SWITCHING ──
+  /* ══════════════════════════════════════════
+     CONTACT LINKS
+  ══════════════════════════════════════════ */
+  const CONTACT_KEY = 'rs_contact';
+  const CONTACT_DEFAULTS = {
+    booking:  'https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec',
+    line:     'https://line.me/ti/p/~@glassheroes',
+    facebook: 'https://www.facebook.com/glasstechautomotive',
+    phone:    '02-943-5900'
+  };
+
+  function getContactLinks() {
+    try { return Object.assign({}, CONTACT_DEFAULTS, JSON.parse(localStorage.getItem(CONTACT_KEY) || '{}')); }
+    catch(e) { return Object.assign({}, CONTACT_DEFAULTS); }
+  }
+
+  function loadContactTab() {
+    const c = getContactLinks();
+    document.getElementById('contactBooking').value  = c.booking  || '';
+    document.getElementById('contactLine').value     = c.line     || '';
+    document.getElementById('contactFacebook').value = c.facebook || '';
+    document.getElementById('contactPhone').value    = c.phone    || '';
+    renderContactPreview(c);
+  }
+
+  function renderContactPreview(c) {
+    const saved = JSON.parse(localStorage.getItem(CONTACT_KEY) || 'null');
+    const box  = document.getElementById('contactPreview');
+    const body = document.getElementById('contactPreviewBody');
+    if (!saved) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    body.innerHTML = [
+      saved.booking  ? `<div>📅 จองคิว: <a href="${saved.booking}"  target="_blank" style="color:var(--cyan);">${saved.booking}</a></div>` : '',
+      saved.line     ? `<div>💬 LINE: <a href="${saved.line}"     target="_blank" style="color:var(--cyan);">${saved.line}</a></div>` : '',
+      saved.facebook ? `<div>📘 Facebook: <a href="${saved.facebook}" target="_blank" style="color:var(--cyan);">${saved.facebook}</a></div>` : '',
+      saved.phone    ? `<div>📞 โทร: ${saved.phone}</div>` : ''
+    ].join('');
+  }
+
+  function saveContactLinks() {
+    const data = {
+      booking:  document.getElementById('contactBooking').value.trim(),
+      line:     document.getElementById('contactLine').value.trim(),
+      facebook: document.getElementById('contactFacebook').value.trim(),
+      phone:    document.getElementById('contactPhone').value.trim()
+    };
+    /* บันทึกเฉพาะช่องที่มีค่า */
+    const toSave = {};
+    Object.keys(data).forEach(k => { if (data[k]) toSave[k] = data[k]; });
+    if (!Object.keys(toSave).length) {
+      showToast('⚠️ กรุณากรอกอย่างน้อย 1 ช่อง', 'warn'); return;
+    }
+    localStorage.setItem(CONTACT_KEY, JSON.stringify(toSave));
+    renderContactPreview(toSave);
+    showToast('✅ บันทึกช่องทางติดต่อแล้ว');
+  }
+
+  function clearContactLinks() {
+    if (!confirm('คืนค่าเริ่มต้นทุกช่องทาง?')) return;
+    localStorage.removeItem(CONTACT_KEY);
+    loadContactTab();
+    showToast('↩️ คืนค่าเริ่มต้นแล้ว');
+  }
+
   function switchAdminTab(tab) {
-    const TABS = ['articles','seo','tags','stats','settings','backup','promos','reviews','branches','faq','popup','homepage'];
+    const TABS = ['articles','seo','tags','stats','settings','backup','promos','reviews','branches','faq','popup','homepage','contact'];
     TABS.forEach(t => {
       const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
       const pane = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
@@ -2948,6 +3074,7 @@
     if (tab === 'faq')      renderFaqList();
     if (tab === 'popup')    loadPopupForm();
     if (tab === 'homepage') { loadHomepageForm(); loadHpImgPreviews(); }
+    if (tab === 'contact')  loadContactTab();
     // scroll content to top on tab switch
     const content = document.querySelector('.admin-content');
     if (content) content.scrollTop = 0;

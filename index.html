@@ -1096,6 +1096,33 @@
     } catch(e){}
   })();
   </script>
+  <script>/* RS Contact Loader */
+  (function(){
+    try {
+      var c = JSON.parse(localStorage.getItem('rs_contact') || '{}');
+      if (!c.booking && !c.line && !c.facebook && !c.phone) return;
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[href]').forEach(function(a) {
+          var h = a.getAttribute('href') || '';
+          if (c.booking && h.indexOf('script.google.com') !== -1) {
+            a.href = c.booking;
+          } else if (c.line && (h.indexOf('line.me') !== -1)) {
+            a.href = c.line;
+          } else if (c.facebook && h.indexOf('facebook.com') !== -1) {
+            a.href = c.facebook;
+          } else if (c.phone && h.indexOf('tel:') === 0) {
+            var num = c.phone.replace(/[^0-9]/g,'');
+            a.href = 'tel:' + num;
+            /* อัปเดต text ที่แสดงถ้าเป็นตัวเลขโทรศัพท์เปล่า */
+            if (/^[\d\-\s\(\)]+$/.test(a.textContent.trim())) {
+              a.textContent = c.phone;
+            }
+          }
+        });
+      });
+    } catch(e){}
+  })();
+  </script>
 </head>
 <body>
 
