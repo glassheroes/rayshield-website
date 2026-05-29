@@ -399,7 +399,7 @@
       overflow: hidden; position: relative;
     }
     .product-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      width: 100%; height: 100%; object-fit: contain; object-position: center;
       opacity: 1; filter: none;
     }
     .product-body { padding: 28px 32px 32px; }
@@ -838,6 +838,11 @@
       /* Products */
       .product-header { padding: 24px 20px 18px; }
       .product-body { padding: 20px; }
+      .product-img-wrap { height: 240px; }
+      .product-img-wrap img { object-fit: contain; width: 100%; height: 100%; }
+      /* Hero banner */
+      .hero-car-wrap { aspect-ratio: 16/10; }
+      #hpBannerImg { object-fit: contain; width: 100%; height: 100%; }
       /* Layout */
       .branches-grid { grid-template-columns: repeat(2, 1fr); }
       .booking-grid { grid-template-columns: 1fr; }
@@ -885,6 +890,10 @@
       .product-header { padding: 20px 16px 16px; }
       .product-body { padding: 16px; }
       .product-specs { gap: 8px; }
+      .product-img-wrap { height: 200px; }
+      /* Hero banner */
+      .hero-car-wrap { aspect-ratio: 4/3; }
+      #hpBannerImg { object-fit: contain; }
       /* Footer */
       .footer-grid { gap: 28px; }
       /* Section text */
