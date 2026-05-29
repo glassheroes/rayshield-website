@@ -494,7 +494,8 @@
 
     /* ===== COMPARE TABLE ===== */
     #compare { background: #fff; }
-    .compare-table-wrap { margin-top: 48px; overflow-x: auto; }
+    .compare-table-wrap { margin-top: 48px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .compare-table th { white-space: nowrap; }
     table.compare-table {
       width: 100%; border-collapse: separate; border-spacing: 0;
       border-radius: 16px; overflow: hidden; box-shadow: var(--shadow);
@@ -894,7 +895,7 @@
       .hero-badge-card { bottom: 10px; right: 10px; top: auto; padding: 8px 12px; font-size: 0.8rem; }
       .hero-badge-card .big { font-size: 1.25rem; }
       /* Features bar */
-      .features-row { justify-content: flex-start; gap: 12px 28px; flex-wrap: wrap; }
+      .features-row { justify-content: center; gap: 12px 28px; flex-wrap: wrap; }
       .features-row .divider-v { display: none; }
       .feature-item { flex: 0 0 calc(50% - 14px); }
       /* Products */
