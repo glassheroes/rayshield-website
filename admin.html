@@ -1935,6 +1935,69 @@
           <button class="btn btn-success" style="padding:12px 32px;" onclick="saveHomepage()">💾 บันทึกหน้าแรก</button>
         </div>
 
+        <!-- Homepage Images -->
+        <div class="hp-block">
+          <div class="hp-block-title">🖼️ รูปภาพหน้าแรก</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:8px;">
+
+            <!-- Banner -->
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;color:#94a3b8;margin-bottom:8px;">รูป Banner (Hero)</div>
+              <div id="hpImgDropBanner" onclick="document.getElementById('hpImgFileBanner').click()"
+                style="border:2px dashed #334155;border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:#0d1a2e;transition:border-color .2s;"
+                onmouseenter="this.style.borderColor='#00b4d8'" onmouseleave="this.style.borderColor='#334155'">
+                <div style="font-size:1.8rem;">🖼️</div>
+                <div style="font-size:0.8rem;color:#64748b;margin-top:4px;">คลิกเพื่อเลือกรูป</div>
+              </div>
+              <input type="file" id="hpImgFileBanner" accept="image/*" style="display:none;" onchange="handleHpImg(this,'banner','hpPreviewBanner')">
+              <div id="hpPreviewBanner" style="display:none;margin-top:8px;position:relative;">
+                <img style="width:100%;border-radius:10px;max-height:120px;object-fit:cover;">
+                <button onclick="clearHpImg('banner','hpPreviewBanner','hpImgFileBanner')"
+                  style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);border:none;color:#fff;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:0.8rem;">✕</button>
+              </div>
+            </div>
+
+            <!-- Nano Ceramic Plus -->
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;color:#94a3b8;margin-bottom:8px;">รูปสินค้า Nano Ceramic Plus</div>
+              <div id="hpImgDropPlus" onclick="document.getElementById('hpImgFilePlus').click()"
+                style="border:2px dashed #334155;border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:#0d1a2e;transition:border-color .2s;"
+                onmouseenter="this.style.borderColor='#00b4d8'" onmouseleave="this.style.borderColor='#334155'">
+                <div style="font-size:1.8rem;">⭐</div>
+                <div style="font-size:0.8rem;color:#64748b;margin-top:4px;">คลิกเพื่อเลือกรูป</div>
+              </div>
+              <input type="file" id="hpImgFilePlus" accept="image/*" style="display:none;" onchange="handleHpImg(this,'nanoCeramicPlus','hpPreviewPlus')">
+              <div id="hpPreviewPlus" style="display:none;margin-top:8px;position:relative;">
+                <img style="width:100%;border-radius:10px;max-height:120px;object-fit:contain;background:#111;">
+                <button onclick="clearHpImg('nanoCeramicPlus','hpPreviewPlus','hpImgFilePlus')"
+                  style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);border:none;color:#fff;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:0.8rem;">✕</button>
+              </div>
+            </div>
+
+            <!-- Nano Ceramic -->
+            <div>
+              <div style="font-size:0.85rem;font-weight:600;color:#94a3b8;margin-bottom:8px;">รูปสินค้า Nano Ceramic</div>
+              <div id="hpImgDropStd" onclick="document.getElementById('hpImgFileStd').click()"
+                style="border:2px dashed #334155;border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:#0d1a2e;transition:border-color .2s;"
+                onmouseenter="this.style.borderColor='#00b4d8'" onmouseleave="this.style.borderColor='#334155'">
+                <div style="font-size:1.8rem;">🎞️</div>
+                <div style="font-size:0.8rem;color:#64748b;margin-top:4px;">คลิกเพื่อเลือกรูป</div>
+              </div>
+              <input type="file" id="hpImgFileStd" accept="image/*" style="display:none;" onchange="handleHpImg(this,'nanoCeramic','hpPreviewStd')">
+              <div id="hpPreviewStd" style="display:none;margin-top:8px;position:relative;">
+                <img style="width:100%;border-radius:10px;max-height:120px;object-fit:contain;background:#111;">
+                <button onclick="clearHpImg('nanoCeramic','hpPreviewStd','hpImgFileStd')"
+                  style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);border:none;color:#fff;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:0.8rem;">✕</button>
+              </div>
+            </div>
+
+          </div>
+          <div style="margin-top:14px;">
+            <button class="btn btn-success" onclick="saveHpImgs()">💾 บันทึกรูปภาพ</button>
+            <span style="font-size:0.8rem;color:#64748b;margin-left:12px;">รูปที่บันทึกจะแสดงบนหน้าแรกทันที</span>
+          </div>
+        </div>
+
         <!-- Hero Section -->
         <div class="hp-block">
           <div class="hp-block-title">🦸 Hero Section</div>
@@ -2858,7 +2921,7 @@
     if (tab === 'seo')      loadSeoTab();
     if (tab === 'faq')      renderFaqList();
     if (tab === 'popup')    loadPopupForm();
-    if (tab === 'homepage') loadHomepageForm();
+    if (tab === 'homepage') { loadHomepageForm(); loadHpImgPreviews(); }
     // scroll content to top on tab switch
     const content = document.querySelector('.admin-content');
     if (content) content.scrollTop = 0;
@@ -4307,6 +4370,79 @@
     document.getElementById('hpPromoDesc').value   = sections.promoDesc   || '';
     document.getElementById('hpReviewTitle').value = sections.reviewTitle || '';
     document.getElementById('hpBranchTitle').value = sections.branchTitle || '';
+  }
+
+  /* ── HOMEPAGE IMAGES ── */
+  const HP_IMG_KEY = 'rs_hp_imgs';
+
+  function getHpImgs() {
+    try { return JSON.parse(localStorage.getItem(HP_IMG_KEY) || '{}'); } catch { return {}; }
+  }
+
+  function loadHpImgPreviews() {
+    const imgs = getHpImgs();
+    const map = { banner:'hpPreviewBanner', nanoCeramicPlus:'hpPreviewPlus', nanoCeramic:'hpPreviewStd' };
+    Object.entries(map).forEach(([key, previewId]) => {
+      if (imgs[key]) {
+        const wrap = document.getElementById(previewId);
+        if (wrap) { wrap.querySelector('img').src = imgs[key]; wrap.style.display = 'block'; }
+      }
+    });
+  }
+
+  function handleHpImg(input, key, previewId) {
+    const file = input.files[0];
+    if (!file || !file.type.startsWith('image/')) { showToast('⚠️ กรุณาเลือกไฟล์รูปภาพ', true); return; }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      img.onload = function() {
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+          else { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const b64 = canvas.toDataURL('image/jpeg', 0.82);
+        const wrap = document.getElementById(previewId);
+        if (wrap) { wrap.querySelector('img').src = b64; wrap.style.display = 'block'; }
+        // เก็บ temp ใน dataset
+        document.getElementById(previewId).dataset.b64 = b64;
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearHpImg(key, previewId, fileInputId) {
+    const wrap = document.getElementById(previewId);
+    if (wrap) { wrap.style.display = 'none'; wrap.querySelector('img').src = ''; delete wrap.dataset.b64; }
+    const inp = document.getElementById(fileInputId);
+    if (inp) inp.value = '';
+    // ลบออกจาก localStorage
+    const imgs = getHpImgs();
+    delete imgs[key];
+    localStorage.setItem(HP_IMG_KEY, JSON.stringify(imgs));
+    showToast('🗑️ ลบรูปภาพเรียบร้อย');
+  }
+
+  function saveHpImgs() {
+    const imgs = getHpImgs();
+    const map = { banner:'hpPreviewBanner', nanoCeramicPlus:'hpPreviewPlus', nanoCeramic:'hpPreviewStd' };
+    let changed = 0;
+    Object.entries(map).forEach(([key, previewId]) => {
+      const wrap = document.getElementById(previewId);
+      if (wrap && wrap.dataset.b64) { imgs[key] = wrap.dataset.b64; changed++; }
+    });
+    try {
+      localStorage.setItem(HP_IMG_KEY, JSON.stringify(imgs));
+      showToast(changed > 0 ? `✅ บันทึกรูปภาพ ${changed} รูป เรียบร้อย` : '✅ บันทึกแล้ว (ไม่มีรูปใหม่)');
+    } catch(e) {
+      showToast('⚠️ พื้นที่จัดเก็บเต็ม — ลองลดขนาดรูป', true);
+    }
   }
 
   function saveHomepage() {

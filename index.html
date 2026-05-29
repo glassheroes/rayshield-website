@@ -1007,6 +1007,24 @@
     } catch(e){}
   })();
   </script>
+  <!-- Homepage Image Loader -->
+  <script>
+  (function(){
+    try {
+      var imgs = JSON.parse(localStorage.getItem('rs_hp_imgs') || '{}');
+      function applyImg(id, src) {
+        if (!src) return;
+        var el = document.getElementById(id);
+        if (el) el.src = src;
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        applyImg('hpBannerImg',  imgs.banner);
+        applyImg('hpImgPlus',    imgs.nanoCeramicPlus);
+        applyImg('hpImgStd',     imgs.nanoCeramic);
+      });
+    } catch(e){}
+  })();
+  </script>
 </head>
 <body>
 
@@ -1131,7 +1149,7 @@
                 inset 0 1px 0 rgba(255,255,255,0.15);
               position:relative;
             ">
-              <img src="images/banner.png" alt="RAY-SHIELD Nano Ceramic Film Banner"
+              <img id="hpBannerImg" src="images/banner.png" alt="RAY-SHIELD Nano Ceramic Film Banner"
                 style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;border-radius:16px;" />
               <!-- ขอบเงา 3D ด้านใน -->
               <div style="
@@ -1200,7 +1218,7 @@
             <div class="product-subtitle">รุ่นพรีเมียม เทคโนโลยีสูงสุด สำหรับผู้ใช้งานจริงจัง</div>
           </div>
           <div class="product-img-wrap">
-            <img src="images/nano-ceramic-plus.png" alt="Ray-Shield Nano Ceramic Plus ฟิล์มกรองแสงพรีเมียม" loading="lazy" onerror="this.style.display='none'">
+            <img id="hpImgPlus" src="images/nano-ceramic-plus.png" alt="Ray-Shield Nano Ceramic Plus ฟิล์มกรองแสงพรีเมียม" loading="lazy" onerror="this.style.display='none'">
           </div>
           <div class="product-body">
             <div class="product-specs">
@@ -1229,7 +1247,7 @@
             <div class="product-subtitle">เทคโนโลยี Nano Ceramic สำหรับการใช้งานทั่วไป</div>
           </div>
           <div class="product-img-wrap">
-            <img src="images/nano-ceramic.png" alt="Ray-Shield Nano Ceramic ฟิล์มกรองแสง" loading="lazy" onerror="this.style.display='none'">
+            <img id="hpImgStd" src="images/nano-ceramic.png" alt="Ray-Shield Nano Ceramic ฟิล์มกรองแสง" loading="lazy" onerror="this.style.display='none'">
           </div>
           <div class="product-body">
             <div class="product-specs">
