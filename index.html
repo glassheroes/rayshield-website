@@ -37,13 +37,19 @@
   <meta name="twitter:description" content="ฟิล์มกรองแสงรถยนต์ Nano Ceramic เทคโนโลยีล่าสุด ป้องกัน UV 99% รับประกัน 8 ปี โทร 02-943-5900" />
   <meta name="twitter:image" content="https://rayshield-website.pages.dev/images/banner.png" />
 
-  <!-- Preload critical resources -->
+  <!-- Preload critical resources (LCP) -->
+  <link rel="preload" as="image" href="/images/banner.png" fetchpriority="high" />
   <link rel="preload" as="image" href="/images/logo.png" />
 
-  <!-- Fonts -->
+  <!-- DNS Prefetch สำหรับ external resources -->
+  <link rel="dns-prefetch" href="https://maps.app.goo.gl" />
+  <link rel="dns-prefetch" href="https://line.me" />
+  <link rel="dns-prefetch" href="https://script.google.com" />
+
+  <!-- Fonts — โหลดเฉพาะ weight ที่ใช้จริง (400,600,800) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=optional" rel="stylesheet" />
   <title>Ray-Shield | ฟิล์มกรองแสง Nano Ceramic คุณภาพสูง</title>
   <script>/* RS Tag Loader */(function(){try{var c=JSON.parse(localStorage.getItem('rs_site_tags')||'{}'),h=document.head;function sc(src,code){var s=document.createElement('script');if(src){s.src=src;s.async=true;}if(code)s.textContent=code;h.appendChild(s);}function mt(n,v,p){if(!v)return;var e=document.querySelector(p?'meta[property="'+n+'"]':'meta[name="'+n+'"]');if(!e){e=document.createElement('meta');if(p)e.setAttribute('property',n);else e.setAttribute('name',n);h.appendChild(e);}e.setAttribute('content',v);}if(c.meta){mt('description',c.meta.description);mt('keywords',c.meta.keywords);mt('robots',c.meta.robots);mt('og:title',c.meta.ogTitle,1);mt('og:description',c.meta.ogDesc,1);mt('og:image',c.meta.ogImage,1);}if(c.gtm&&c.gtm.enabled&&c.gtm.id){sc(null,'(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","'+c.gtm.id+'");');}if(c.ga4&&c.ga4.enabled&&c.ga4.id){sc('https://www.googletagmanager.com/gtag/js?id='+c.ga4.id);sc(null,'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","'+c.ga4.id+'");');}if(c.gads&&c.gads.enabled&&c.gads.id){if(!(c.ga4&&c.ga4.enabled)){sc('https://www.googletagmanager.com/gtag/js?id='+c.gads.id);sc(null,'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());');}sc(null,'gtag("config","'+c.gads.id+'");'+(c.gads.label?'gtag("event","conversion",{"send_to":"'+c.gads.id+'/'+c.gads.label+'"});':''));}if(c.fbpixel&&c.fbpixel.enabled&&c.fbpixel.id){sc(null,'!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","'+c.fbpixel.id+'");fbq("track","PageView");');}if(c.linetag&&c.linetag.enabled&&c.linetag.id){sc(null,'(function(g,d,o){g._ltq=g._ltq||[];g._lt=g._lt||function(){g._ltq.push(arguments)};var h=location.protocol==="https:"?"https://d.line-scdn.net":"http://d.line-scdn.net";var s=d.createElement("script");s.async=1;s.src=h+"/n/line_tag/public/release/v1/lt.min.js";var t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t)})(window,document);_lt("init",{customerType:"lap",tagId:"'+c.linetag.id+'"});_lt("send","pv",["'+c.linetag.id+'"]);');}if(c.customHead){var d=document.createElement('div');d.innerHTML=c.customHead;while(d.firstChild)h.appendChild(d.firstChild);}if(c.customBody){document.addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.innerHTML=c.customBody;document.body.appendChild(d);});}}catch(e){}})();</script>
   <script>/* RS Favicon Loader */(function(){try{var f=localStorage.getItem('rs_site_favicon');if(f){var l=document.querySelector('link[rel~="icon"]');if(!l){l=document.createElement('link');l.rel='icon';document.head.appendChild(l);}l.href=f;}}catch(e){}})();</script>
@@ -1356,7 +1362,7 @@
   <nav id="navbar" role="navigation" aria-label="เมนูหลัก">
     <div class="nav-container">
       <a href="#hero" class="nav-logo" aria-label="Ray-Shield หน้าแรก">
-        <img src="images/logo.png" alt="RAY-SHIELD Nano Ceramic Film" />
+        <img src="images/logo.png" alt="RAY-SHIELD Nano Ceramic Film" width="180" height="36" />
       </a>
 
       <ul class="nav-menu" role="menubar">
@@ -1458,6 +1464,7 @@
               position:relative;
             ">
               <img id="hpBannerImg" src="images/banner.png" alt="RAY-SHIELD Nano Ceramic Film Banner"
+                width="800" height="600" fetchpriority="high"
                 style="width:100%;height:100%;object-fit:cover;object-position:center 88%;display:block;border-radius:16px;" />
               <!-- ขอบเงา 3D ด้านใน -->
               <div style="
@@ -1526,7 +1533,10 @@
             <div class="product-subtitle">รุ่นพรีเมียม เทคโนโลยีสูงสุด สำหรับผู้ใช้งานจริงจัง</div>
           </div>
           <div class="product-img-wrap">
-            <img id="hpImgPlus" src="images/nano-ceramic-plus.png" alt="Ray-Shield Nano Ceramic Plus ฟิล์มกรองแสงพรีเมียม" loading="lazy" onerror="this.style.display='none'">
+            <picture>
+              <source srcset="images/nano-ceramic-plus.webp" type="image/webp" />
+              <img id="hpImgPlus" src="images/nano-ceramic-plus.png" alt="Ray-Shield Nano Ceramic Plus ฟิล์มกรองแสงพรีเมียม" width="600" height="320" loading="lazy" onerror="this.style.display='none'">
+            </picture>
           </div>
           <div class="product-body">
             <div class="product-specs">
@@ -1555,7 +1565,10 @@
             <div class="product-subtitle">เทคโนโลยี Nano Ceramic สำหรับการใช้งานทั่วไป</div>
           </div>
           <div class="product-img-wrap">
-            <img id="hpImgStd" src="images/nano-ceramic.png" alt="Ray-Shield Nano Ceramic ฟิล์มกรองแสง" loading="lazy" onerror="this.style.display='none'">
+            <picture>
+              <source srcset="images/nano-ceramic.webp" type="image/webp" />
+              <img id="hpImgStd" src="images/nano-ceramic.png" alt="Ray-Shield Nano Ceramic ฟิล์มกรองแสง" width="600" height="320" loading="lazy" onerror="this.style.display='none'">
+            </picture>
           </div>
           <div class="product-body">
             <div class="product-specs">
@@ -1708,7 +1721,7 @@
         <!-- 1: สำนักงานใหญ่ รามอินทรา กม.4 -->
         <article class="branch-card hq">
           <div class="branch-map">
-            <img src="images/branches/ramindra.png" alt="สาขาสำนักงานใหญ่ รามอินทรา กม.4" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/ramindra.png" alt="สาขาสำนักงานใหญ่ รามอินทรา กม.4" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
             <span class="branch-hq-badge">สำนักงานใหญ่</span>
           </div>
           <div class="branch-info">
@@ -1723,7 +1736,7 @@
         <!-- 2: ศรีนครินทร์ -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/srinakarin.png" alt="สาขาศรีนครินทร์" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/srinakarin.png" alt="สาขาศรีนครินทร์" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขาศรีนครินทร์</div>
@@ -1737,7 +1750,7 @@
         <!-- 3: รัตนาธิเบศร์ -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/rattanathibet.png" alt="สาขารัตนาธิเบศร์" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/rattanathibet.png" alt="สาขารัตนาธิเบศร์" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขารัตนาธิเบศร์</div>
@@ -1751,7 +1764,7 @@
         <!-- 4: ราชพฤกษ์ -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/ratchaphruek.png" alt="สาขาราชพฤกษ์" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/ratchaphruek.png" alt="สาขาราชพฤกษ์" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขาราชพฤกษ์</div>
@@ -1765,7 +1778,7 @@
         <!-- 5: คลองหลวง-ตลาดไท -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/klongluang.png" alt="สาขาคลองหลวง-ตลาดไท" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/klongluang.png" alt="สาขาคลองหลวง-ตลาดไท" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขาคลองหลวง-ตลาดไท</div>
@@ -1779,7 +1792,7 @@
         <!-- 6: พระราม 2 -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/rama2.png" alt="สาขาพระราม 2" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/rama2.png" alt="สาขาพระราม 2" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขาพระราม 2</div>
@@ -1793,7 +1806,7 @@
         <!-- 7: มีนบุรี-หนองจอก -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/minburi.png" alt="สาขามีนบุรี-หนองจอก" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/minburi.png" alt="สาขามีนบุรี-หนองจอก" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขามีนบุรี-หนองจอก</div>
@@ -1807,7 +1820,7 @@
         <!-- 8: บางแสน-ชลบุรี -->
         <article class="branch-card">
           <div class="branch-map">
-            <img src="images/branches/bangsan.jpg" alt="สาขาบางแสน-ชลบุรี" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
+            <img src="images/branches/bangsan.jpg" alt="สาขาบางแสน-ชลบุรี" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />
           </div>
           <div class="branch-info">
             <div class="branch-name">สาขาบางแสน-ชลบุรี</div>
@@ -2398,7 +2411,7 @@
         const hqClass  = b.isHq ? ' hq' : '';
         const hqBadge  = b.isHq ? '<span class="branch-hq-badge">สำนักงานใหญ่</span>' : '';
         const mapContent = b.img
-          ? `<img src="${esc(b.img)}" alt="${esc(b.name)}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />${hqBadge}`
+          ? `<img src="${esc(b.img)}" alt="${esc(b.name)}" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />${hqBadge}`
           : `<span style="font-size:2.4rem;">${esc(b.emoji||'🗺️')}</span>${hqBadge}`;
         const mapsLink = b.maps ? `<a href="${esc(b.maps)}" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>` : '';
         const telLink  = b.tel  ? `<div class="branch-tel">📞 <a href="tel:${esc(b.tel.replace(/[-\s]/g,''))}" style="color:inherit;">${esc(b.tel)}</a></div>` : '';
