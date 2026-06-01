@@ -10,6 +10,8 @@
   <meta property="og:description" content="ฟิล์มกรองแสงรถยนต์ Nano Ceramic เทคโนโลยีล่าสุด ป้องกัน UV 99% โทร 02-9435900" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="th_TH" />
+  <meta property="og:image" content="https://rayshield-website.pages.dev/images/banner.png" />
+  <meta property="og:url" content="https://rayshield-website.pages.dev/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -38,7 +40,7 @@
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: 'Noto Sans Thai', 'Segoe UI', Arial, sans-serif;
-      color: #1a1a2e;
+      color: var(--text);
       background: #fff;
       overflow-x: hidden;
     }
@@ -166,7 +168,7 @@
       appearance: none; -webkit-appearance: none;
       background: transparent; border: none; outline: none;
     }
-    .hamburger:hover { background: rgba(0,180,216,0.12); }
+    .hamburger:hover { background: rgba(0,119,182,0.08); }
     .hamburger span { display: block; width: 24px; height: 2px; background: #374151; border-radius: 2px; transition: .3s; }
     .hamburger.open span { background: var(--blue); }
     .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -297,13 +299,13 @@
       animation: fadeInLeft .7s ease .4s both;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), var(--cyan2));
+      background: linear-gradient(135deg, var(--blue), var(--cyan2));
       color: #fff; padding: 14px 32px; border-radius: 50px;
       font-size: 1rem; font-weight: 700; border: none; cursor: pointer;
-      box-shadow: 0 4px 24px rgba(0,180,216,0.4);
-      transition: all .25s; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,119,182,0.35);
+      transition: transform .25s, box-shadow .25s; display: inline-flex; align-items: center; gap: 8px;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,180,216,0.6); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,119,182,0.50); }
     .btn-outline {
       background: transparent; color: var(--navy);
       padding: 14px 32px; border-radius: 50px; font-size: 1rem; font-weight: 600;
@@ -407,12 +409,12 @@
     .product-header::after {
       content: ''; position: absolute;
       width: 200px; height: 200px; border-radius: 50%;
-      background: rgba(0,180,216,0.12);
+      background: rgba(0,119,182,0.12);
       top: -60px; right: -40px;
     }
     .product-tier {
-      display: inline-block; background: rgba(0,180,216,0.2);
-      color: var(--cyan); padding: 4px 12px; border-radius: 50px;
+      display: inline-block; background: rgba(0,119,182,0.18);
+      color: #BAE6FD; padding: 4px 12px; border-radius: 50px;
       font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;
       text-transform: uppercase; margin-bottom: 12px;
     }
@@ -444,21 +446,21 @@
       padding: 6px 14px; font-size: 0.8rem; font-weight: 600;
       color: var(--text); display: flex; align-items: center; gap: 6px;
     }
-    .spec-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+    .spec-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
     .product-card.plus .spec-pill .dot { background: var(--gold); }
     .product-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
     .pf-item {
       display: flex; align-items: flex-start; gap: 10px;
       font-size: 0.9rem; color: var(--text);
     }
-    .pf-icon { color: var(--cyan); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .pf-icon { color: var(--blue); font-size: 1rem; flex-shrink: 0; margin-top: 2px; display: flex; }
     .product-card.plus .pf-icon { color: var(--gold); }
     .product-cta {
       display: block; text-align: center;
       padding: 13px; border-radius: 50px;
-      font-weight: 700; font-size: 0.95rem; transition: all .25s;
-      background: linear-gradient(135deg, var(--cyan), var(--cyan2));
-      color: #fff; box-shadow: 0 4px 16px rgba(0,180,216,0.3);
+      font-weight: 700; font-size: 0.95rem; transition: transform .25s, box-shadow .25s;
+      background: linear-gradient(135deg, var(--blue), var(--cyan2));
+      color: #fff; box-shadow: 0 4px 16px rgba(0,119,182,0.25);
     }
     .product-card.plus .product-cta {
       background: linear-gradient(135deg, var(--gold), #e07b10);
@@ -1043,6 +1045,24 @@
     .product-cta, .btn-primary, .btn-outline, .btn-book,
     .promo-cta, .branch-maps, .ap-card { cursor: pointer; }
 
+    /* ===== SVG ICON SYSTEM ===== */
+    .ico { width: 20px; height: 20px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .ico-sm { width: 16px; height: 16px; }
+    .ico-xs { width: 14px; height: 14px; }
+
+    /* ===== SKIP LINK ===== */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--blue); color: #fff;
+      padding: 8px 20px; border-radius: 0 0 10px 10px;
+      font-size: 0.9rem; font-weight: 600;
+      transition: top .2s; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; outline: 3px solid var(--gold); outline-offset: 2px; }
+
+    /* ===== FLOAT ANIMATION PAUSE ON HOVER ===== */
+    .hero-badge-card:hover { animation-play-state: paused; }
+
     /* ===== PREFERS REDUCED MOTION ===== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1210,6 +1230,31 @@
 </head>
 <body>
 
+  <!-- ===== SKIP LINK ===== -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก</a>
+
+  <!-- ===== SVG ICON SYMBOLS ===== -->
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="ico-thermo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></symbol>
+    <symbol id="ico-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="ico-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="ico-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+    <symbol id="ico-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="ico-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="ico-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="ico-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.36 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="ico-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="ico-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="ico-fire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+    <symbol id="ico-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="ico-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+    <symbol id="ico-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></symbol>
+    <symbol id="ico-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+    <symbol id="ico-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></symbol>
+  </svg>
+
   <!-- ===== TOP BANNER (Dynamic) ===== -->
   <div id="rsBanner">
     <a id="rsBannerLink" href="#"><span id="rsBannerText"></span></a>
@@ -1241,8 +1286,8 @@
         <li class="nav-item" role="none" tabindex="0">
           <a class="nav-link has-dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false">ฟิล์มกรองแสง</a>
           <ul class="dropdown" role="menu">
-            <li><a href="#nano-ceramic" role="menuitem">🔵 Ray-Shield Nano Ceramic</a></li>
-            <li><a href="#nano-ceramic-plus" role="menuitem">🟡 Ray-Shield Nano Ceramic Plus</a></li>
+            <li><a href="#nano-ceramic" role="menuitem">Ray-Shield Nano Ceramic</a></li>
+            <li><a href="#nano-ceramic-plus" role="menuitem">Ray-Shield Nano Ceramic Plus</a></li>
           </ul>
         </li>
         <li class="nav-item" role="none">
@@ -1281,6 +1326,8 @@
     <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" onclick="closeMobile()" style="color: var(--cyan); font-weight: 700;">จองคิวเข้ารับบริการ</a>
   </div>
 
+  <main id="main-content">
+
   <!-- ===== HERO ===== -->
   <section id="hero" aria-label="หน้าแรก">
     <div class="hero-bg-glow"></div>
@@ -1313,7 +1360,7 @@
             </div>
           </div>
           <div class="hero-actions">
-            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" class="btn-primary" id="heroCta1">📅 จองคิวเลย</a>
+            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" class="btn-primary" id="heroCta1"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-calendar"/></svg> จองคิวเลย</a>
             <a href="#films" class="btn-outline" id="heroCta2">ดูรายละเอียดฟิล์ม →</a>
           </div>
         </div>
@@ -1355,27 +1402,27 @@
     <div class="container">
       <div class="features-row">
         <div class="feature-item">
-          <div class="feature-icon">☀️</div>
+          <div class="feature-icon"><svg class="ico" aria-hidden="true"><use href="#ico-sun"/></svg></div>
           <div class="feature-label"><strong>ป้องกัน UV 99%</strong>ปกป้องผิวและเบาะรถ</div>
         </div>
         <div class="divider-v"></div>
         <div class="feature-item">
-          <div class="feature-icon">🌡️</div>
+          <div class="feature-icon"><svg class="ico" aria-hidden="true"><use href="#ico-thermo"/></svg></div>
           <div class="feature-label"><strong>ป้องกัน IR สูงสุด 97%</strong>เย็นสบายตลอดการเดินทาง</div>
         </div>
         <div class="divider-v"></div>
         <div class="feature-item">
-          <div class="feature-icon">🔒</div>
+          <div class="feature-icon"><svg class="ico" aria-hidden="true"><use href="#ico-lock"/></svg></div>
           <div class="feature-label"><strong>เพิ่มความเป็นส่วนตัว</strong>มืดจากภายนอก ชัดใสจากภายใน</div>
         </div>
         <div class="divider-v"></div>
         <div class="feature-item">
-          <div class="feature-icon">🛡️</div>
+          <div class="feature-icon"><svg class="ico" aria-hidden="true"><use href="#ico-shield"/></svg></div>
           <div class="feature-label"><strong>รับประกัน 8 ปี</strong>มั่นใจทุกการติดตั้ง</div>
         </div>
         <div class="divider-v"></div>
         <div class="feature-item">
-          <div class="feature-icon">🏆</div>
+          <div class="feature-icon"><svg class="ico" aria-hidden="true"><use href="#ico-award"/></svg></div>
           <div class="feature-label"><strong>ช่างผู้เชี่ยวชาญ</strong>ประสบการณ์มากกว่า 38 ปี</div>
         </div>
       </div>
@@ -1395,7 +1442,7 @@
         <!-- Nano Ceramic Plus -->
         <div class="product-card plus" id="nano-ceramic-plus" aria-label="Ray-Shield Nano Ceramic Plus">
           <div class="product-header">
-            <div class="product-tier">⭐ Premium Series</div>
+            <div class="product-tier">Premium Series</div>
             <div class="product-name">Ray-Shield Nano Ceramic Plus</div>
             <div class="product-subtitle">รุ่นพรีเมียม เทคโนโลยีสูงสุด สำหรับผู้ใช้งานจริงจัง</div>
           </div>
@@ -1410,14 +1457,14 @@
               <span class="spec-pill"><span class="dot"></span>ประกัน 8 ปี</span>
             </div>
             <div class="product-features">
-              <div class="pf-item"><span class="pf-icon">⭐</span>กันรังสียูวี (UV) สูงสุด 99%</div>
-              <div class="pf-item"><span class="pf-icon">⭐</span>กันรังสีอินฟราเรด (IR) สูงสุด 97% (สูงกว่ารุ่นธรรมดา)</div>
-              <div class="pf-item"><span class="pf-icon">⭐</span>ลดความร้อนจากแสงแดดสูงสุด 87% เทคโนโลยี Multi-Layer Nano Ceramic</div>
-              <div class="pf-item"><span class="pf-icon">⭐</span>ความใสพิเศษ ทัศนวิสัยดีเยี่ยมทั้งกลางวัน-กลางคืน</div>
-              <div class="pf-item"><span class="pf-icon">⭐</span>ไม่รบกวนสัญญาณดิจิทัลทุกประเภท</div>
-              <div class="pf-item"><span class="pf-icon">⭐</span>รับประกัน 8 ปีเต็ม</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>กันรังสียูวี (UV) สูงสุด 99%</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>กันรังสีอินฟราเรด (IR) สูงสุด 97% (สูงกว่ารุ่นธรรมดา)</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>ลดความร้อนจากแสงแดดสูงสุด 87% เทคโนโลยี Multi-Layer Nano Ceramic</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>ความใสพิเศษ ทัศนวิสัยดีเยี่ยมทั้งกลางวัน-กลางคืน</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>ไม่รบกวนสัญญาณดิจิทัลทุกประเภท</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-shield"/></svg></span>รับประกัน 8 ปีเต็ม</div>
             </div>
-            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" class="product-cta">📅 จองติดตั้ง Nano Ceramic Plus</a>
+            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" class="product-cta"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-calendar"/></svg> จองติดตั้ง Nano Ceramic Plus</a>
           </div>
         </div>
 
@@ -1439,14 +1486,14 @@
               <span class="spec-pill"><span class="dot"></span>ประกัน 8 ปี</span>
             </div>
             <div class="product-features">
-              <div class="pf-item"><span class="pf-icon">✅</span>กันรังสียูวี (UV) สูงสุด 99%</div>
-              <div class="pf-item"><span class="pf-icon">✅</span>กันรังสีอินฟราเรด (IR) สูงสุด 95%</div>
-              <div class="pf-item"><span class="pf-icon">✅</span>ลดความร้อนจากแสงแดดสูงสุด 86.6% ด้วย Nano Ceramic</div>
-              <div class="pf-item"><span class="pf-icon">✅</span>เพิ่มความเป็นส่วนตัว ลดแสงสะท้อน</div>
-              <div class="pf-item"><span class="pf-icon">✅</span>ไม่รบกวนสัญญาณดิจิทัลทุกประเภท</div>
-              <div class="pf-item"><span class="pf-icon">✅</span>รับประกัน 8 ปีเต็ม</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>กันรังสียูวี (UV) สูงสุด 99%</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>กันรังสีอินฟราเรด (IR) สูงสุด 95%</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>ลดความร้อนจากแสงแดดสูงสุด 86.6% ด้วย Nano Ceramic</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>เพิ่มความเป็นส่วนตัว ลดแสงสะท้อน</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-check"/></svg></span>ไม่รบกวนสัญญาณดิจิทัลทุกประเภท</div>
+              <div class="pf-item"><span class="pf-icon"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-shield"/></svg></span>รับประกัน 8 ปีเต็ม</div>
             </div>
-            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" class="product-cta">📅 จองติดตั้ง Nano Ceramic</a>
+            <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" class="product-cta"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-calendar"/></svg> จองติดตั้ง Nano Ceramic</a>
           </div>
         </div>
 
@@ -1501,7 +1548,7 @@
 
         <!-- Featured: 60% OFF -->
         <div class="promo-card featured">
-          <div class="promo-badge" style="position:absolute;top:16px;left:16px;right:auto;">🔥 HOT DEAL</div>
+          <div class="promo-badge" style="position:absolute;top:16px;left:16px;right:auto;display:flex;align-items:center;gap:5px;"><svg class="ico-xs" aria-hidden="true" style="width:12px;height:12px"><use href="#ico-fire"/></svg> HOT DEAL</div>
           <div class="promo-discount" style="margin-top:2.2rem;">ลด 60%</div>
           <div class="promo-title" style="font-size:1.3rem;">โปรโมชั่นพิเศษสุด!</div>
           <div class="promo-desc">
@@ -1517,7 +1564,7 @@
 
         <!-- Morning Special -->
         <div class="promo-card morning-highlight">
-          <div class="promo-title">⚡ ช่วงเช้า พิเศษสุด!</div>
+          <div class="promo-title" style="display:flex;align-items:center;gap:6px;"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-zap"/></svg> ช่วงเช้า พิเศษสุด!</div>
           <div class="promo-discount" style="font-size:2.5rem;">08:30–11:00</div>
           <div class="promo-desc">
             จองคิวช่วงเช้า <strong style="color:var(--blue);">08:30 – 11:00 น.</strong> รับส่วนลดพิเศษเพิ่มอีก<br><br>
@@ -1555,7 +1602,7 @@
 
       <!-- Countdown -->
       <div class="countdown-wrap">
-        <p class="countdown-title">⏰ โปรโมชั่นสิ้นสุดใน...</p>
+        <p class="countdown-title" style="display:flex;align-items:center;justify-content:center;gap:6px;"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-clock"/></svg> โปรโมชั่นสิ้นสุดใน...</p>
         <div class="countdown-boxes">
           <div class="count-box"><div class="count-num" id="cd-days">00</div><div class="count-lbl">วัน</div></div>
           <div class="count-sep">:</div>
@@ -1589,8 +1636,8 @@
             <div class="branch-name">รามอินทรา กม.4 (สนญ)</div>
             <div class="branch-addr">228,230,232,234 รามอินทรา กม.4 ซ.รามอินทรา 12 แขวงท่าแร้ง เขตบางเขน กรุงเทพฯ 10220</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/cxuimLrCkpbPaG9F6" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/cxuimLrCkpbPaG9F6" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1603,8 +1650,8 @@
             <div class="branch-name">สาขาศรีนครินทร์</div>
             <div class="branch-addr">293, 295 ซ.ศรีนครินทร์ 63 แขวงประเวศ เขตประเวศ กรุงเทพฯ 10250</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/zffCegLJ6MqrXJtv9" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/zffCegLJ6MqrXJtv9" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1617,8 +1664,8 @@
             <div class="branch-name">สาขารัตนาธิเบศร์</div>
             <div class="branch-addr">25/22-23 ถ.รัตนาธิเบศร์ ต.บางกระสอ อ.เมืองนนทบุรี จ.นนทบุรี 11000</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/vvYHCxK7VSaFbWxJA" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/vvYHCxK7VSaFbWxJA" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1631,8 +1678,8 @@
             <div class="branch-name">สาขาราชพฤกษ์</div>
             <div class="branch-addr">37/21 หมู่ 2 ต.บางขุนกอง อ.บางกรวย จ.นนทบุรี 11130</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/WsepCiFjs1HUbHsQ7" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/WsepCiFjs1HUbHsQ7" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1645,8 +1692,8 @@
             <div class="branch-name">สาขาคลองหลวง-ตลาดไท</div>
             <div class="branch-addr">46/35 หมู่ 7 ถ.คลองหลวง ต.คลองสอง อ.คลองหลวง จ.ปทุมธานี 12120</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/jXnrhgu6jzLd4Zn69" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/jXnrhgu6jzLd4Zn69" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1659,8 +1706,8 @@
             <div class="branch-name">สาขาพระราม 2</div>
             <div class="branch-addr">648 ถ.พระรามที่ 2 แขวงบางมด เขตจอมทอง กรุงเทพฯ 10150</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/pweXiNpQgvrJ84577" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/pweXiNpQgvrJ84577" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1673,8 +1720,8 @@
             <div class="branch-name">สาขามีนบุรี-หนองจอก</div>
             <div class="branch-addr">48/9-48/10 ถ.เชื่อมสัมพันธ์ แขวงกระทุ่มราย เขตหนองจอก กรุงเทพฯ 10530</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/6p38e5s8D4HyaLcE7" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/6p38e5s8D4HyaLcE7" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
@@ -1687,15 +1734,15 @@
             <div class="branch-name">สาขาบางแสน-ชลบุรี</div>
             <div class="branch-addr">1/3 ถ.สุขุมวิท ต.ห้วยกะปิ อ.เมืองชลบุรี จ.ชลบุรี 20000</div>
             <div class="branch-hours">🕐 จ.–อา. 08:30–17:30 น.</div>
-            <div class="branch-tel">📞 <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
-            <a href="https://maps.app.goo.gl/BshMEZ1bejKvu4K46" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>
+            <div class="branch-tel"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> <a href="tel:029435900" style="color:inherit;">02-943-5900</a></div>
+            <a href="https://maps.app.goo.gl/BshMEZ1bejKvu4K46" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>
           </div>
         </article>
 
       </div>
 
       <div style="margin-top:36px;text-align:center;">
-        <p style="color:var(--muted);margin-bottom:16px;">📞 สอบถามสาขาใกล้บ้านได้เลย · โทร <strong>02-943-5900</strong> หรือ Add Line</p>
+        <p style="color:var(--muted);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-phone"/></svg> สอบถามสาขาใกล้บ้านได้เลย · โทร <strong>02-943-5900</strong> หรือ Add Line</p>
         <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer"
            style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#06c755,#04a542);color:#fff;padding:12px 28px;border-radius:50px;font-weight:700;font-size:0.95rem;box-shadow:0 4px 16px rgba(6,199,85,0.4);">
           💬 Add Line @glassheroes
@@ -1748,7 +1795,7 @@
                   text-decoration:none;"
            onmouseover="this.style.background='var(--cyan)';this.style.color='#fff';this.style.boxShadow='0 6px 24px rgba(0,180,216,0.35)'"
            onmouseout="this.style.background='transparent';this.style.color='var(--cyan)';this.style.boxShadow='none'">
-          ⭐ ดูรีวิวทั้งหมด
+          <svg class="ico ico-sm" aria-hidden="true" style="margin-right:4px"><use href="#ico-star"/></svg> ดูรีวิวทั้งหมด
         </a>
       </div>
     </div>
@@ -1763,7 +1810,7 @@
         <!-- Left: FAQ (dynamic) -->
         <div>
           <div class="booking-form">
-            <div class="form-title">❓ ถาม-ตอบที่พบบ่อย (FAQ)</div>
+            <div class="form-title">ถาม-ตอบที่พบบ่อย (FAQ)</div>
             <div class="faq-list" id="faqList"></div>
           </div>
         </div>
@@ -1781,18 +1828,18 @@
 
           <!-- Morning Highlight Box -->
           <div style="background:rgba(0,119,182,0.06);border:1px solid rgba(0,119,182,0.18);border-radius:16px;padding:20px 24px;margin-bottom:28px;">
-            <div style="color:var(--blue);font-weight:800;font-size:1rem;margin-bottom:8px;">🌅 จองช่วงเช้า = รับสิทธิพิเศษ!</div>
+            <div style="color:var(--blue);font-weight:800;font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:6px;"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-sunrise"/></svg> จองช่วงเช้า = รับสิทธิพิเศษ!</div>
             <ul style="color:var(--text);font-size:0.9rem;display:flex;flex-direction:column;gap:6px;">
-              <li>⏰ เปิดรับจอง 08:30 – 11:00 น. ทุกวัน</li>
-              <li>🎁 รับส่วนลดพิเศษเพิ่มเมื่อจองช่วงเช้า</li>
-              <li>⚡ รับรถได้เร็วกว่า ไม่ต้องรอนาน</li>
-              <li>✅ จำนวนจำกัดต่อวัน – จองเลยก่อนเต็ม!</li>
+              <li style="display:flex;align-items:center;gap:6px;"><svg class="ico-xs" aria-hidden="true" style="width:13px;height:13px;flex-shrink:0"><use href="#ico-clock"/></svg> เปิดรับจอง 08:30 – 11:00 น. ทุกวัน</li>
+              <li style="display:flex;align-items:center;gap:6px;"><svg class="ico-xs" aria-hidden="true" style="width:13px;height:13px;flex-shrink:0"><use href="#ico-gift"/></svg> รับส่วนลดพิเศษเพิ่มเมื่อจองช่วงเช้า</li>
+              <li style="display:flex;align-items:center;gap:6px;"><svg class="ico-xs" aria-hidden="true" style="width:13px;height:13px;flex-shrink:0"><use href="#ico-zap"/></svg> รับรถได้เร็วกว่า ไม่ต้องรอนาน</li>
+              <li style="display:flex;align-items:center;gap:6px;"><svg class="ico-xs" aria-hidden="true" style="width:13px;height:13px;flex-shrink:0"><use href="#ico-check"/></svg> จำนวนจำกัดต่อวัน – จองเลยก่อนเต็ม!</li>
             </ul>
           </div>
 
           <div class="contact-methods">
             <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="Add Line @glassheroes">
-              <div class="contact-icon line">💬</div>
+              <div class="contact-icon line"><svg class="ico" aria-hidden="true"><use href="#ico-chat"/></svg></div>
               <div class="contact-info">
                 <div class="label">LINE Official Account</div>
                 <div class="value">@glassheroes</div>
@@ -1800,7 +1847,7 @@
               </div>
             </a>
             <a href="tel:029435900" class="contact-card" aria-label="โทร 02-9435900">
-              <div class="contact-icon tel">📞</div>
+              <div class="contact-icon tel"><svg class="ico" aria-hidden="true"><use href="#ico-phone"/></svg></div>
               <div class="contact-info">
                 <div class="label">โทรศัพท์</div>
                 <div class="value">02-9435900</div>
@@ -1840,9 +1887,9 @@
           </div>
           <p>ฟิล์มกรองแสงรถยนต์คุณภาพสูง ด้วยเทคโนโลยี Nano Ceramic ปกป้องคุณและรถยนต์จากความร้อนและรังสี UV</p>
           <div class="footer-socials">
-            <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Line">💬</a>
-            <a href="tel:029435900" class="social-btn" aria-label="โทรศัพท์">📞</a>
-            <a href="https://www.facebook.com/glasstechautomotive" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">f</a>
+            <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Line"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-chat"/></svg></a>
+            <a href="tel:029435900" class="social-btn" aria-label="โทรศัพท์"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-phone"/></svg></a>
+            <a href="https://www.facebook.com/glasstechautomotive" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><svg class="ico ico-sm" aria-hidden="true"><use href="#ico-fb"/></svg></a>
           </div>
         </div>
         <div class="footer-col">
@@ -1891,14 +1938,18 @@
     </div>
   </div>
 
+  </main><!-- /#main-content -->
+
   <!-- Floating LINE Button -->
   <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer"
      class="float-line" aria-label="ติดต่อผ่าน Line @glassheroes" title="Add Line @glassheroes">
-    💬
+    <svg aria-hidden="true" style="width:26px;height:26px"><use href="#ico-chat"/></svg>
   </a>
 
   <!-- Scroll to Top -->
-  <button id="scrollTop" aria-label="กลับขึ้นด้านบน" title="ขึ้นด้านบน">▲</button>
+  <button id="scrollTop" aria-label="กลับขึ้นด้านบน" title="ขึ้นด้านบน">
+    <svg aria-hidden="true" style="width:18px;height:18px"><use href="#ico-arrow-up"/></svg>
+  </button>
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
@@ -2270,7 +2321,7 @@
         const mapContent = b.img
           ? `<img src="${esc(b.img)}" alt="${esc(b.name)}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />${hqBadge}`
           : `<span style="font-size:2.4rem;">${esc(b.emoji||'🗺️')}</span>${hqBadge}`;
-        const mapsLink = b.maps ? `<a href="${esc(b.maps)}" target="_blank" rel="noopener noreferrer" class="branch-maps">🗺️ ดูแผนที่ →</a>` : '';
+        const mapsLink = b.maps ? `<a href="${esc(b.maps)}" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>` : '';
         const telLink  = b.tel  ? `<div class="branch-tel">📞 <a href="tel:${esc(b.tel.replace(/[-\s]/g,''))}" style="color:inherit;">${esc(b.tel)}</a></div>` : '';
         return `<article class="branch-card${hqClass}">
           <div class="branch-map">${mapContent}</div>
