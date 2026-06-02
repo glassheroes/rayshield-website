@@ -3236,10 +3236,16 @@
   }
 
   function switchAdminTab(tab) {
-    const TABS = ['articles','seo','tags','stats','settings','backup','promos','reviews','branches','faq','popup','homepage','contact'];
+    const TABS = ['articles','seo','tags','stats','settings','backup','promos','reviews','branches','faq','popup','homepage','contact','film-plus','film-std'];
+    /* ID map: tab name → { btn, pane } element IDs */
+    const ID_MAP = {
+      'film-plus': { btn: 'tabBtnFilmPlus', pane: 'tabFilmPlus' },
+      'film-std':  { btn: 'tabBtnFilmStd',  pane: 'tabFilmStd'  }
+    };
     TABS.forEach(t => {
-      const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
-      const pane = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+      const ids = ID_MAP[t];
+      const btn  = ids ? document.getElementById(ids.btn)  : document.getElementById('tabBtn'  + t.charAt(0).toUpperCase() + t.slice(1));
+      const pane = ids ? document.getElementById(ids.pane) : document.getElementById('tab'     + t.charAt(0).toUpperCase() + t.slice(1));
       if (btn)  btn.classList.toggle('active', t === tab);
       if (pane) pane.style.display = t === tab ? '' : 'none';
     });
@@ -5537,14 +5543,13 @@
     renderFilmSpecs(key, pfx);
   }
 
-  /* Hook into switchAdminTab */
-  const _origSwitch = window.switchAdminTab || function(){};
-  (function() {
-    const orig = window.switchAdminTab;
-    window.switchAdminTab = function(tab) {
-      orig(tab);
-      if (tab === 'film-plus') { setTimeout(() => loadFilmTab('rs_film_plus','fp'), 50); }
-      if (tab === 'film-std')  { setTimeout(() => loadFilmTab('rs_film_std','fs'), 50); }
+  /* เพิ่ม film tab handlers เข้า switchAdminTab โดยตรง */
+  (function(){
+    const _orig = switchAdminTab;
+    switchAdminTab = function(tab) {
+      _orig(tab);
+      if (tab === 'film-plus') { setTimeout(function(){ loadFilmTab('rs_film_plus','fp'); }, 50); }
+      if (tab === 'film-std')  { setTimeout(function(){ loadFilmTab('rs_film_std','fs');  }, 50); }
     };
   })();
 
