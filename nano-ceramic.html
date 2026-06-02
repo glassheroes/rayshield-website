@@ -264,25 +264,25 @@
         <div>
           <div class="film-series-badge">Standard Series</div>
           <h1 class="film-title">Ray-Shield<br>Nano Ceramic</h1>
-          <p class="film-subtitle">ฟิล์มกรองแสงเทคโนโลยี Nano Ceramic คุณภาพสูง เหมาะสำหรับการใช้งานทั่วไปในราคาที่คุ้มค่า</p>
+          <p class="film-subtitle" id="filmSubtitle">ฟิล์มกรองแสงเทคโนโลยี Nano Ceramic คุณภาพสูง เหมาะสำหรับการใช้งานทั่วไปในราคาที่คุ้มค่า</p>
           <div class="hero-specs">
             <div class="hero-spec">
-              <div class="num">99%</div>
+              <div class="num" id="filmStatUV">99%</div>
               <div class="lbl">UV Rejection</div>
             </div>
             <div class="hero-divider"></div>
             <div class="hero-spec">
-              <div class="num">95%</div>
+              <div class="num" id="filmStatIR">95%</div>
               <div class="lbl">IR Rejection</div>
             </div>
             <div class="hero-divider"></div>
             <div class="hero-spec">
-              <div class="num">86.6%</div>
+              <div class="num" id="filmStatHeat">86.6%</div>
               <div class="lbl">Heat Rejection</div>
             </div>
             <div class="hero-divider"></div>
             <div class="hero-spec">
-              <div class="num">8 ปี</div>
+              <div class="num" id="filmStatWarranty">8 ปี</div>
               <div class="lbl">รับประกัน</div>
             </div>
           </div>
@@ -309,7 +309,7 @@
       <span class="section-tag">สีและความเข้มฟิล์ม</span>
       <h2 class="section-title">ตัวเลือกสีฟิล์ม Nano Ceramic</h2>
       <p class="section-desc">มีให้เลือกหลายระดับความเข้ม เพื่อให้เหมาะกับทุกความต้องการและกฎหมายจราจร</p>
-      <div class="colors-grid">
+      <div class="colors-grid" id="filmColorsGrid">
 
         <div class="color-card">
           <div class="color-swatch" style="background:#f0f0f0;color:#888;">5%</div>
@@ -388,7 +388,7 @@
               <th>Heat Reject</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="filmCodesBody">
             <tr>
               <td>กระจกหน้า (Windshield)</td>
               <td><span class="film-code">NC-70-WS</span></td>
@@ -455,7 +455,7 @@
       <span class="section-tag">ข้อมูลทางเทคนิค</span>
       <h2 class="section-title">คุณสมบัติและมาตรฐาน Nano Ceramic</h2>
       <p class="section-desc">ผ่านการทดสอบมาตรฐานสากล เทคโนโลยี Nano Ceramic คุณภาพสูง ราคาคุ้มค่า</p>
-      <div class="specs-grid">
+      <div class="specs-grid" id="filmSpecsGrid">
         <div class="spec-row">
           <span class="label">UV Rejection (กันรังสี UV)</span>
           <span class="value highlight">99%</span>
@@ -526,5 +526,60 @@
     </div>
   </footer>
 
+<script>
+(function() {
+  var KEY = 'rs_film_std';
+  function esc(s) { var d=document.createElement('div');d.textContent=String(s||'');return d.innerHTML; }
+  function el(id) { return document.getElementById(id); }
+  try {
+    var data = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (!data) return;
+
+    if (data.hero) {
+      if (data.hero.subtitle  && el('filmSubtitle'))     el('filmSubtitle').textContent    = data.hero.subtitle;
+      if (data.hero.uv        && el('filmStatUV'))       el('filmStatUV').textContent      = data.hero.uv;
+      if (data.hero.ir        && el('filmStatIR'))       el('filmStatIR').textContent      = data.hero.ir;
+      if (data.hero.heat      && el('filmStatHeat'))     el('filmStatHeat').textContent    = data.hero.heat;
+      if (data.hero.warranty  && el('filmStatWarranty')) el('filmStatWarranty').textContent= data.hero.warranty;
+    }
+
+    if (data.colors && data.colors.length && el('filmColorsGrid')) {
+      el('filmColorsGrid').innerHTML = data.colors.map(function(c) {
+        return '<div class="color-card">' +
+          '<div class="color-swatch" style="background:'+esc(c.bg)+';color:'+esc(c.fg)+';">'+esc(c.vlt)+'</div>' +
+          '<div class="color-info">' +
+            '<div class="color-name">'+esc(c.name)+'</div>' +
+            '<div class="color-code">'+esc(c.code)+'</div>' +
+            '<div class="color-vlt">VLT '+esc(c.vlt)+'</div>' +
+          '</div></div>';
+      }).join('');
+    }
+
+    if (data.filmCodes && data.filmCodes.length && el('filmCodesBody')) {
+      el('filmCodesBody').innerHTML = data.filmCodes.map(function(r) {
+        return '<tr>' +
+          '<td>'+esc(r.position)+'</td>' +
+          '<td><span class="film-code">'+esc(r.code)+'</span></td>' +
+          '<td>'+esc(r.colorName)+'</td>' +
+          '<td>'+esc(r.vlt)+'</td>' +
+          '<td>'+esc(r.uv)+'</td>' +
+          '<td>'+esc(r.ir)+'</td>' +
+          '<td>'+esc(r.heat)+'</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    if (data.specs && data.specs.length && el('filmSpecsGrid')) {
+      el('filmSpecsGrid').innerHTML = data.specs.map(function(s) {
+        var cls = s.style ? ' '+esc(s.style) : '';
+        return '<div class="spec-row">' +
+          '<span class="label">'+esc(s.label)+'</span>' +
+          '<span class="value'+cls+'">'+esc(s.value)+'</span>' +
+        '</div>';
+      }).join('');
+    }
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>

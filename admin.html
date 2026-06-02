@@ -683,6 +683,12 @@
         <button class="sidebar-btn" onclick="switchAdminTab('faq')" id="tabBtnFaq">
           <span class="sb-icon">❓</span>FAQ
         </button>
+        <button class="sidebar-btn" onclick="switchAdminTab('film-plus')" id="tabBtnFilmPlus">
+          <span class="sb-icon">🎞</span>ฟิล์ม NC Plus
+        </button>
+        <button class="sidebar-btn" onclick="switchAdminTab('film-std')" id="tabBtnFilmStd">
+          <span class="sb-icon">🎞</span>ฟิล์ม NC Standard
+        </button>
       </div>
 
       <!-- กลุ่ม: ออกแบบ -->
@@ -723,6 +729,180 @@
 
     <!-- ── CONTENT ── -->
     <div class="admin-content">
+
+    <!-- ── TAB: FILM PLUS ── -->
+    <div id="tabFilmPlus" style="display:none;">
+      <h2 style="font-size:1.1rem;font-weight:800;color:var(--cyan);margin-bottom:20px;">🎞 จัดการฟิล์ม Nano Ceramic Plus</h2>
+
+      <!-- Hero -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">📋 ข้อมูลหลัก</div>
+        <div class="form-group"><label>คำอธิบาย (subtitle)</label><input id="fp_subtitle" placeholder="ฟิล์มกรองแสงรุ่น Premium..."></div>
+        <div class="form-row">
+          <div class="form-group"><label>UV Rejection</label><input id="fp_uv" placeholder="99%"></div>
+          <div class="form-group"><label>IR Rejection</label><input id="fp_ir" placeholder="97%"></div>
+          <div class="form-group"><label>Heat Rejection</label><input id="fp_heat" placeholder="87%"></div>
+          <div class="form-group"><label>รับประกัน</label><input id="fp_warranty" placeholder="8 ปี"></div>
+        </div>
+        <button class="btn btn-primary" onclick="saveFilmHero('rs_film_plus','fp')">💾 บันทึกข้อมูลหลัก</button>
+      </div>
+
+      <!-- Colors -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">🎨 สีฟิล์ม</div>
+        <input type="hidden" id="fp_colorId">
+        <div class="form-row">
+          <div class="form-group"><label>รหัสสี</label><input id="fp_cCode" placeholder="NCP-05"></div>
+          <div class="form-group"><label>ชื่อสี</label><input id="fp_cName" placeholder="Limo Black"></div>
+          <div class="form-group"><label>VLT%</label><input id="fp_cVlt" placeholder="5%"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>สีพื้นหลัง Swatch</label><input id="fp_cBg" type="color" value="#1a1a1a" style="height:40px;padding:4px 8px;"></div>
+          <div class="form-group"><label>สีตัวอักษร Swatch</label><input id="fp_cFg" type="color" value="#888888" style="height:40px;padding:4px 8px;"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveFilmColor('rs_film_plus','fp')">➕ เพิ่ม/บันทึกสี</button>
+          <button class="btn btn-ghost" onclick="clearFilmColorForm('fp')">ล้างฟอร์ม</button>
+        </div>
+        <div id="fp_colorList" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;"></div>
+      </div>
+
+      <!-- Film Codes -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">🏷️ รหัสฟิล์ม</div>
+        <input type="hidden" id="fp_rowId">
+        <div class="form-row">
+          <div class="form-group"><label>ตำแหน่ง</label><input id="fp_rPos" placeholder="กระจกหน้า (Windshield)"></div>
+          <div class="form-group"><label>รหัสฟิล์ม</label><input id="fp_rCode" placeholder="NCP-70-WS"></div>
+          <div class="form-group"><label>ชื่อสี</label><input id="fp_rColorName" placeholder="Crystal Clear"></div>
+          <div class="form-group"><label>VLT</label><input id="fp_rVlt" placeholder="70%"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>UV Reject</label><input id="fp_rUV" placeholder="99%"></div>
+          <div class="form-group"><label>IR Reject</label><input id="fp_rIR" placeholder="97%"></div>
+          <div class="form-group"><label>Heat Reject</label><input id="fp_rHeat" placeholder="87%"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveFilmCode('rs_film_plus','fp')">➕ เพิ่ม/บันทึก</button>
+          <button class="btn btn-ghost" onclick="clearFilmCodeForm('fp')">ล้างฟอร์ม</button>
+        </div>
+        <div id="fp_rowList" style="margin-top:16px;"></div>
+      </div>
+
+      <!-- Specs -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">⚙️ ข้อมูลทางเทคนิค</div>
+        <input type="hidden" id="fp_specId">
+        <div class="form-row">
+          <div class="form-group"><label>หัวข้อ</label><input id="fp_sLabel" placeholder="UV Rejection (กันรังสี UV)"></div>
+          <div class="form-group"><label>ค่า</label><input id="fp_sValue" placeholder="99%"></div>
+          <div class="form-group">
+            <label>สไตล์</label>
+            <select id="fp_sStyle">
+              <option value="">ปกติ (navy)</option>
+              <option value="highlight">highlight (สีทอง)</option>
+              <option value="green">green (สีเขียว)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveFilmSpec('rs_film_plus','fp')">➕ เพิ่ม/บันทึก</button>
+          <button class="btn btn-ghost" onclick="clearFilmSpecForm('fp')">ล้างฟอร์ม</button>
+        </div>
+        <div id="fp_specList" style="margin-top:16px;"></div>
+      </div>
+
+      <div style="padding:12px 16px;background:rgba(0,180,216,0.08);border-radius:10px;font-size:0.85rem;color:#64748b;">
+        💡 การแก้ไขจะแสดงผลทันทีที่ <a href="nano-ceramic-plus.html" target="_blank" style="color:#0077B6;font-weight:600;">หน้า Nano Ceramic Plus</a>
+      </div>
+    </div>
+
+    <!-- ── TAB: FILM STD ── -->
+    <div id="tabFilmStd" style="display:none;">
+      <h2 style="font-size:1.1rem;font-weight:800;color:var(--cyan);margin-bottom:20px;">🎞 จัดการฟิล์ม Nano Ceramic (Standard)</h2>
+
+      <!-- Hero -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">📋 ข้อมูลหลัก</div>
+        <div class="form-group"><label>คำอธิบาย (subtitle)</label><input id="fs_subtitle" placeholder="ฟิล์มกรองแสงเทคโนโลยี Nano Ceramic..."></div>
+        <div class="form-row">
+          <div class="form-group"><label>UV Rejection</label><input id="fs_uv" placeholder="99%"></div>
+          <div class="form-group"><label>IR Rejection</label><input id="fs_ir" placeholder="95%"></div>
+          <div class="form-group"><label>Heat Rejection</label><input id="fs_heat" placeholder="86.6%"></div>
+          <div class="form-group"><label>รับประกัน</label><input id="fs_warranty" placeholder="8 ปี"></div>
+        </div>
+        <button class="btn btn-primary" onclick="saveFilmHero('rs_film_std','fs')">💾 บันทึกข้อมูลหลัก</button>
+      </div>
+
+      <!-- Colors -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">🎨 สีฟิล์ม</div>
+        <input type="hidden" id="fs_colorId">
+        <div class="form-row">
+          <div class="form-group"><label>รหัสสี</label><input id="fs_cCode" placeholder="NC-05"></div>
+          <div class="form-group"><label>ชื่อสี</label><input id="fs_cName" placeholder="Limo Black"></div>
+          <div class="form-group"><label>VLT%</label><input id="fs_cVlt" placeholder="5%"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>สีพื้นหลัง Swatch</label><input id="fs_cBg" type="color" value="#1a1a1a" style="height:40px;padding:4px 8px;"></div>
+          <div class="form-group"><label>สีตัวอักษร Swatch</label><input id="fs_cFg" type="color" value="#888888" style="height:40px;padding:4px 8px;"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveFilmColor('rs_film_std','fs')">➕ เพิ่ม/บันทึกสี</button>
+          <button class="btn btn-ghost" onclick="clearFilmColorForm('fs')">ล้างฟอร์ม</button>
+        </div>
+        <div id="fs_colorList" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;"></div>
+      </div>
+
+      <!-- Film Codes -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">🏷️ รหัสฟิล์ม</div>
+        <input type="hidden" id="fs_rowId">
+        <div class="form-row">
+          <div class="form-group"><label>ตำแหน่ง</label><input id="fs_rPos" placeholder="กระจกหน้า (Windshield)"></div>
+          <div class="form-group"><label>รหัสฟิล์ม</label><input id="fs_rCode" placeholder="NC-70-WS"></div>
+          <div class="form-group"><label>ชื่อสี</label><input id="fs_rColorName" placeholder="Crystal Clear"></div>
+          <div class="form-group"><label>VLT</label><input id="fs_rVlt" placeholder="70%"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>UV Reject</label><input id="fs_rUV" placeholder="99%"></div>
+          <div class="form-group"><label>IR Reject</label><input id="fs_rIR" placeholder="95%"></div>
+          <div class="form-group"><label>Heat Reject</label><input id="fs_rHeat" placeholder="86.6%"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveFilmCode('rs_film_std','fs')">➕ เพิ่ม/บันทึก</button>
+          <button class="btn btn-ghost" onclick="clearFilmCodeForm('fs')">ล้างฟอร์ม</button>
+        </div>
+        <div id="fs_rowList" style="margin-top:16px;"></div>
+      </div>
+
+      <!-- Specs -->
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-title">⚙️ ข้อมูลทางเทคนิค</div>
+        <input type="hidden" id="fs_specId">
+        <div class="form-row">
+          <div class="form-group"><label>หัวข้อ</label><input id="fs_sLabel" placeholder="UV Rejection (กันรังสี UV)"></div>
+          <div class="form-group"><label>ค่า</label><input id="fs_sValue" placeholder="99%"></div>
+          <div class="form-group">
+            <label>สไตล์</label>
+            <select id="fs_sStyle">
+              <option value="">ปกติ (navy)</option>
+              <option value="highlight">highlight (สีน้ำเงิน)</option>
+              <option value="green">green (สีเขียว)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveFilmSpec('rs_film_std','fs')">➕ เพิ่ม/บันทึก</button>
+          <button class="btn btn-ghost" onclick="clearFilmSpecForm('fs')">ล้างฟอร์ม</button>
+        </div>
+        <div id="fs_specList" style="margin-top:16px;"></div>
+      </div>
+
+      <div style="padding:12px 16px;background:rgba(0,180,216,0.08);border-radius:10px;font-size:0.85rem;color:#64748b;">
+        💡 การแก้ไขจะแสดงผลทันทีที่ <a href="nano-ceramic.html" target="_blank" style="color:#0077B6;font-weight:600;">หน้า Nano Ceramic</a>
+      </div>
+    </div>
 
     <!-- ── TAB: ARTICLES ── -->
     <div id="tabArticles">
@@ -5037,6 +5217,336 @@
   function escAdmin(s) {
     const d = document.createElement('div'); d.textContent = String(s||''); return d.innerHTML;
   }
+
+  /* ══════════════════════════════════════════════════════
+     FILM MANAGEMENT (Nano Ceramic Plus & Standard)
+  ══════════════════════════════════════════════════════ */
+
+  const FILM_DEFAULTS = {
+    'rs_film_plus': {
+      hero: { subtitle:'ฟิล์มกรองแสงรุ่น Premium เทคโนโลยี Multi-Layer Nano Ceramic สูงสุด', uv:'99%', ir:'97%', heat:'87%', warranty:'8 ปี' },
+      colors: [
+        {id:'c1',code:'NCP-05',name:'Limo Black',vlt:'5%',bg:'#1a1a1a',fg:'#888888'},
+        {id:'c2',code:'NCP-15',name:'Ultra Dark',vlt:'15%',bg:'#555555',fg:'#cccccc'},
+        {id:'c3',code:'NCP-20',name:'Dark Smoke',vlt:'20%',bg:'#777777',fg:'#dddddd'},
+        {id:'c4',code:'NCP-35',name:'Medium Smoke',vlt:'35%',bg:'#999999',fg:'#eeeeee'},
+        {id:'c5',code:'NCP-50',name:'Light Smoke',vlt:'50%',bg:'#bbbbbb',fg:'#555555'},
+        {id:'c6',code:'NCP-70',name:'Crystal Clear',vlt:'70%',bg:'#dddddd',fg:'#555555'}
+      ],
+      filmCodes: [
+        {id:'r1',position:'กระจกหน้า (Windshield)',code:'NCP-70-WS',colorName:'Crystal Clear',vlt:'70%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r2',position:'กระจกข้าง (Side Window)',code:'NCP-35-SD',colorName:'Medium Smoke',vlt:'35%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r3',position:'กระจกข้าง (Side Window)',code:'NCP-20-SD',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r4',position:'กระจกหลัง (Rear Window)',code:'NCP-20-RW',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r5',position:'กระจกหลัง (Rear Window)',code:'NCP-15-RW',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r6',position:'กระจกหน้าต่างบน (Sunroof)',code:'NCP-15-SR',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'97%',heat:'87%'}
+      ],
+      specs: [
+        {id:'s1',label:'UV Rejection (กันรังสี UV)',value:'99%',style:'highlight'},
+        {id:'s2',label:'IR Rejection (กันรังสีอินฟราเรด)',value:'สูงสุด 97%',style:'highlight'},
+        {id:'s3',label:'Total Heat Rejection (ลดความร้อน)',value:'สูงสุด 87%',style:'highlight'},
+        {id:'s4',label:'เทคโนโลยี',value:'Multi-Layer Nano Ceramic',style:''},
+        {id:'s5',label:'การรบกวนสัญญาณ',value:'ไม่รบกวน 0%',style:'green'},
+        {id:'s6',label:'ความทนทานต่อรอยขีดข่วน',value:'Scratch Resistant',style:'green'},
+        {id:'s7',label:'ความใสกลางคืน',value:'คมชัด ไม่มีฝ้า',style:'green'},
+        {id:'s8',label:'ระยะรับประกัน',value:'8 ปีเต็ม',style:'green'},
+        {id:'s9',label:'ความหนาฟิล์ม',value:'2.0 mil',style:''},
+        {id:'s10',label:'การส่งผ่านความร้อน (SC)',value:'0.21',style:''}
+      ]
+    },
+    'rs_film_std': {
+      hero: { subtitle:'ฟิล์มกรองแสงเทคโนโลยี Nano Ceramic คุณภาพสูง เหมาะสำหรับการใช้งานทั่วไป', uv:'99%', ir:'95%', heat:'86.6%', warranty:'8 ปี' },
+      colors: [
+        {id:'c1',code:'NC-05',name:'Limo Black',vlt:'5%',bg:'#1a1a1a',fg:'#888888'},
+        {id:'c2',code:'NC-15',name:'Ultra Dark',vlt:'15%',bg:'#555555',fg:'#cccccc'},
+        {id:'c3',code:'NC-20',name:'Dark Smoke',vlt:'20%',bg:'#777777',fg:'#dddddd'},
+        {id:'c4',code:'NC-35',name:'Medium Smoke',vlt:'35%',bg:'#999999',fg:'#eeeeee'},
+        {id:'c5',code:'NC-50',name:'Light Smoke',vlt:'50%',bg:'#bbbbbb',fg:'#555555'},
+        {id:'c6',code:'NC-70',name:'Crystal Clear',vlt:'70%',bg:'#dddddd',fg:'#555555'}
+      ],
+      filmCodes: [
+        {id:'r1',position:'กระจกหน้า (Windshield)',code:'NC-70-WS',colorName:'Crystal Clear',vlt:'70%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r2',position:'กระจกข้าง (Side Window)',code:'NC-35-SD',colorName:'Medium Smoke',vlt:'35%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r3',position:'กระจกข้าง (Side Window)',code:'NC-20-SD',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r4',position:'กระจกหลัง (Rear Window)',code:'NC-20-RW',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r5',position:'กระจกหลัง (Rear Window)',code:'NC-15-RW',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r6',position:'กระจกหน้าต่างบน (Sunroof)',code:'NC-15-SR',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'95%',heat:'86.6%'}
+      ],
+      specs: [
+        {id:'s1',label:'UV Rejection (กันรังสี UV)',value:'99%',style:'highlight'},
+        {id:'s2',label:'IR Rejection (กันรังสีอินฟราเรด)',value:'สูงสุด 95%',style:'highlight'},
+        {id:'s3',label:'Total Heat Rejection (ลดความร้อน)',value:'สูงสุด 86.6%',style:'highlight'},
+        {id:'s4',label:'เทคโนโลยี',value:'Nano Ceramic',style:''},
+        {id:'s5',label:'การรบกวนสัญญาณ',value:'ไม่รบกวน 0%',style:'green'},
+        {id:'s6',label:'ความทนทานต่อรอยขีดข่วน',value:'Scratch Resistant',style:'green'},
+        {id:'s7',label:'ความใสกลางคืน',value:'คมชัด ไม่มีฝ้า',style:'green'},
+        {id:'s8',label:'ระยะรับประกัน',value:'8 ปีเต็ม',style:'green'},
+        {id:'s9',label:'ความหนาฟิล์ม',value:'1.5 mil',style:''},
+        {id:'s10',label:'การส่งผ่านความร้อน (SC)',value:'0.25',style:''}
+      ]
+    }
+  };
+
+  function getFilmData(key) {
+    try {
+      const d = JSON.parse(localStorage.getItem(key) || 'null');
+      return d || JSON.parse(JSON.stringify(FILM_DEFAULTS[key]));
+    } catch { return JSON.parse(JSON.stringify(FILM_DEFAULTS[key])); }
+  }
+  function saveFilmData(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+  /* ── Hero ── */
+  function saveFilmHero(key, pfx) {
+    const d = getFilmData(key);
+    d.hero = {
+      subtitle: document.getElementById(pfx+'_subtitle').value.trim() || d.hero.subtitle,
+      uv:       document.getElementById(pfx+'_uv').value.trim() || d.hero.uv,
+      ir:       document.getElementById(pfx+'_ir').value.trim() || d.hero.ir,
+      heat:     document.getElementById(pfx+'_heat').value.trim() || d.hero.heat,
+      warranty: document.getElementById(pfx+'_warranty').value.trim() || d.hero.warranty
+    };
+    saveFilmData(key, d);
+    showToast('✅ บันทึกข้อมูลหลักแล้ว');
+  }
+
+  function loadFilmHero(key, pfx) {
+    const d = getFilmData(key);
+    document.getElementById(pfx+'_subtitle').value = d.hero.subtitle || '';
+    document.getElementById(pfx+'_uv').value        = d.hero.uv || '';
+    document.getElementById(pfx+'_ir').value        = d.hero.ir || '';
+    document.getElementById(pfx+'_heat').value      = d.hero.heat || '';
+    document.getElementById(pfx+'_warranty').value  = d.hero.warranty || '';
+  }
+
+  /* ── Colors ── */
+  function saveFilmColor(key, pfx) {
+    const d = getFilmData(key);
+    const editId = document.getElementById(pfx+'_colorId').value;
+    const obj = {
+      id:   editId || 'c_' + Date.now(),
+      code: document.getElementById(pfx+'_cCode').value.trim(),
+      name: document.getElementById(pfx+'_cName').value.trim(),
+      vlt:  document.getElementById(pfx+'_cVlt').value.trim(),
+      bg:   document.getElementById(pfx+'_cBg').value,
+      fg:   document.getElementById(pfx+'_cFg').value
+    };
+    if (!obj.code || !obj.name) { showToast('⚠️ กรุณาใส่รหัสและชื่อสี', true); return; }
+    if (editId) {
+      const i = d.colors.findIndex(c => c.id === editId);
+      if (i >= 0) d.colors[i] = obj; else d.colors.push(obj);
+    } else { d.colors.push(obj); }
+    saveFilmData(key, d);
+    clearFilmColorForm(pfx);
+    renderFilmColors(key, pfx);
+    showToast('✅ บันทึกสีฟิล์มแล้ว');
+  }
+
+  function deleteFilmColor(key, pfx, id) {
+    if (!confirm('ลบสีฟิล์มนี้?')) return;
+    const d = getFilmData(key);
+    d.colors = d.colors.filter(c => c.id !== id);
+    saveFilmData(key, d);
+    renderFilmColors(key, pfx);
+  }
+
+  function editFilmColor(key, pfx, id) {
+    const d = getFilmData(key);
+    const c = d.colors.find(c => c.id === id);
+    if (!c) return;
+    document.getElementById(pfx+'_colorId').value = c.id;
+    document.getElementById(pfx+'_cCode').value   = c.code;
+    document.getElementById(pfx+'_cName').value   = c.name;
+    document.getElementById(pfx+'_cVlt').value    = c.vlt;
+    document.getElementById(pfx+'_cBg').value     = c.bg;
+    document.getElementById(pfx+'_cFg').value     = c.fg;
+  }
+
+  function clearFilmColorForm(pfx) {
+    ['_colorId','_cCode','_cName','_cVlt'].forEach(s => document.getElementById(pfx+s).value = '');
+    document.getElementById(pfx+'_cBg').value = '#1a1a1a';
+    document.getElementById(pfx+'_cFg').value = '#888888';
+  }
+
+  function renderFilmColors(key, pfx) {
+    const d = getFilmData(key);
+    const el = document.getElementById(pfx+'_colorList');
+    if (!el) return;
+    el.innerHTML = d.colors.map(c => `
+      <div style="background:#0d1a2e;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;width:150px;">
+        <div style="height:56px;background:${escAdmin(c.bg)};display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;color:${escAdmin(c.fg)};">${escAdmin(c.vlt)}</div>
+        <div style="padding:10px;">
+          <div style="font-size:0.85rem;font-weight:700;color:#e2e8f0;">${escAdmin(c.name)}</div>
+          <div style="font-size:0.72rem;color:#94a3b8;margin:2px 0;">${escAdmin(c.code)}</div>
+          <div style="display:flex;gap:6px;margin-top:6px;">
+            <button class="btn btn-sm btn-ghost" onclick="editFilmColor('${key}','${pfx}','${c.id}')">✏️</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteFilmColor('${key}','${pfx}','${c.id}')">🗑️</button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── Film Codes ── */
+  function saveFilmCode(key, pfx) {
+    const d = getFilmData(key);
+    const editId = document.getElementById(pfx+'_rowId').value;
+    const obj = {
+      id:        editId || 'r_' + Date.now(),
+      position:  document.getElementById(pfx+'_rPos').value.trim(),
+      code:      document.getElementById(pfx+'_rCode').value.trim(),
+      colorName: document.getElementById(pfx+'_rColorName').value.trim(),
+      vlt:       document.getElementById(pfx+'_rVlt').value.trim(),
+      uv:        document.getElementById(pfx+'_rUV').value.trim(),
+      ir:        document.getElementById(pfx+'_rIR').value.trim(),
+      heat:      document.getElementById(pfx+'_rHeat').value.trim()
+    };
+    if (!obj.position || !obj.code) { showToast('⚠️ กรุณาใส่ตำแหน่งและรหัสฟิล์ม', true); return; }
+    if (editId) {
+      const i = d.filmCodes.findIndex(r => r.id === editId);
+      if (i >= 0) d.filmCodes[i] = obj; else d.filmCodes.push(obj);
+    } else { d.filmCodes.push(obj); }
+    saveFilmData(key, d);
+    clearFilmCodeForm(pfx);
+    renderFilmCodes(key, pfx);
+    showToast('✅ บันทึกรหัสฟิล์มแล้ว');
+  }
+
+  function deleteFilmCode(key, pfx, id) {
+    if (!confirm('ลบรหัสฟิล์มนี้?')) return;
+    const d = getFilmData(key);
+    d.filmCodes = d.filmCodes.filter(r => r.id !== id);
+    saveFilmData(key, d);
+    renderFilmCodes(key, pfx);
+  }
+
+  function editFilmCode(key, pfx, id) {
+    const d = getFilmData(key);
+    const r = d.filmCodes.find(r => r.id === id);
+    if (!r) return;
+    document.getElementById(pfx+'_rowId').value          = r.id;
+    document.getElementById(pfx+'_rPos').value           = r.position;
+    document.getElementById(pfx+'_rCode').value          = r.code;
+    document.getElementById(pfx+'_rColorName').value     = r.colorName;
+    document.getElementById(pfx+'_rVlt').value           = r.vlt;
+    document.getElementById(pfx+'_rUV').value            = r.uv;
+    document.getElementById(pfx+'_rIR').value            = r.ir;
+    document.getElementById(pfx+'_rHeat').value          = r.heat;
+  }
+
+  function clearFilmCodeForm(pfx) {
+    ['_rowId','_rPos','_rCode','_rColorName','_rVlt','_rUV','_rIR','_rHeat'].forEach(s => {
+      const el = document.getElementById(pfx+s); if (el) el.value = '';
+    });
+  }
+
+  function renderFilmCodes(key, pfx) {
+    const d = getFilmData(key);
+    const el = document.getElementById(pfx+'_rowList');
+    if (!el) return;
+    el.innerHTML = `<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+      <thead><tr style="background:rgba(0,180,216,0.15);">
+        <th style="padding:8px 12px;text-align:left;white-space:nowrap;">ตำแหน่ง</th>
+        <th style="padding:8px 12px;">รหัส</th>
+        <th style="padding:8px 12px;">สี</th>
+        <th style="padding:8px 12px;">VLT</th>
+        <th style="padding:8px 12px;">UV</th>
+        <th style="padding:8px 12px;">IR</th>
+        <th style="padding:8px 12px;">Heat</th>
+        <th style="padding:8px 12px;">จัดการ</th>
+      </tr></thead><tbody>
+      ${d.filmCodes.map(r => `<tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
+        <td style="padding:8px 12px;color:#e2e8f0;">${escAdmin(r.position)}</td>
+        <td style="padding:8px 12px;font-family:monospace;color:#00b4d8;">${escAdmin(r.code)}</td>
+        <td style="padding:8px 12px;">${escAdmin(r.colorName)}</td>
+        <td style="padding:8px 12px;">${escAdmin(r.vlt)}</td>
+        <td style="padding:8px 12px;">${escAdmin(r.uv)}</td>
+        <td style="padding:8px 12px;">${escAdmin(r.ir)}</td>
+        <td style="padding:8px 12px;">${escAdmin(r.heat)}</td>
+        <td style="padding:8px 12px;white-space:nowrap;">
+          <button class="btn btn-sm btn-ghost" onclick="editFilmCode('${key}','${pfx}','${r.id}')">✏️</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteFilmCode('${key}','${pfx}','${r.id}')">🗑️</button>
+        </td>
+      </tr>`).join('')}
+      </tbody></table></div>`;
+  }
+
+  /* ── Specs ── */
+  function saveFilmSpec(key, pfx) {
+    const d = getFilmData(key);
+    const editId = document.getElementById(pfx+'_specId').value;
+    const obj = {
+      id:    editId || 's_' + Date.now(),
+      label: document.getElementById(pfx+'_sLabel').value.trim(),
+      value: document.getElementById(pfx+'_sValue').value.trim(),
+      style: document.getElementById(pfx+'_sStyle').value
+    };
+    if (!obj.label || !obj.value) { showToast('⚠️ กรุณาใส่หัวข้อและค่า', true); return; }
+    if (editId) {
+      const i = d.specs.findIndex(s => s.id === editId);
+      if (i >= 0) d.specs[i] = obj; else d.specs.push(obj);
+    } else { d.specs.push(obj); }
+    saveFilmData(key, d);
+    clearFilmSpecForm(pfx);
+    renderFilmSpecs(key, pfx);
+    showToast('✅ บันทึก Spec แล้ว');
+  }
+
+  function deleteFilmSpec(key, pfx, id) {
+    if (!confirm('ลบ spec นี้?')) return;
+    const d = getFilmData(key);
+    d.specs = d.specs.filter(s => s.id !== id);
+    saveFilmData(key, d);
+    renderFilmSpecs(key, pfx);
+  }
+
+  function editFilmSpec(key, pfx, id) {
+    const d = getFilmData(key);
+    const s = d.specs.find(s => s.id === id);
+    if (!s) return;
+    document.getElementById(pfx+'_specId').value    = s.id;
+    document.getElementById(pfx+'_sLabel').value    = s.label;
+    document.getElementById(pfx+'_sValue').value    = s.value;
+    document.getElementById(pfx+'_sStyle').value    = s.style || '';
+  }
+
+  function clearFilmSpecForm(pfx) {
+    ['_specId','_sLabel','_sValue'].forEach(s => { const el = document.getElementById(pfx+s); if (el) el.value=''; });
+    const sel = document.getElementById(pfx+'_sStyle'); if (sel) sel.value = '';
+  }
+
+  function renderFilmSpecs(key, pfx) {
+    const d = getFilmData(key);
+    const el = document.getElementById(pfx+'_specList');
+    if (!el) return;
+    const styleColor = { highlight:'#f4a940', green:'#4ade80', '':'#e2e8f0' };
+    el.innerHTML = d.specs.map(s => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;margin-bottom:6px;gap:12px;">
+        <span style="font-size:0.85rem;color:#94a3b8;">${escAdmin(s.label)}</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-weight:700;color:${styleColor[s.style]||'#e2e8f0'};">${escAdmin(s.value)}</span>
+          <button class="btn btn-sm btn-ghost" onclick="editFilmSpec('${key}','${pfx}','${s.id}')">✏️</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteFilmSpec('${key}','${pfx}','${s.id}')">🗑️</button>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── Load tab ── */
+  function loadFilmTab(key, pfx) {
+    loadFilmHero(key, pfx);
+    renderFilmColors(key, pfx);
+    renderFilmCodes(key, pfx);
+    renderFilmSpecs(key, pfx);
+  }
+
+  /* Hook into switchAdminTab */
+  const _origSwitch = window.switchAdminTab || function(){};
+  (function() {
+    const orig = window.switchAdminTab;
+    window.switchAdminTab = function(tab) {
+      orig(tab);
+      if (tab === 'film-plus') { setTimeout(() => loadFilmTab('rs_film_plus','fp'), 50); }
+      if (tab === 'film-std')  { setTimeout(() => loadFilmTab('rs_film_std','fs'), 50); }
+    };
+  })();
 
 </script>
 </body>
