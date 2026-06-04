@@ -772,9 +772,8 @@
         <div class="panel-title">🏷️ รหัสฟิล์ม</div>
         <input type="hidden" id="fp_rowId">
         <div class="form-row">
-          <div class="form-group"><label>ตำแหน่ง</label><input id="fp_rPos" placeholder="กระจกหน้า (Windshield)"></div>
+          <div class="form-group"><label>ความเข้มของฟิล์ม</label><input id="fp_rPos" placeholder="กระจกหน้า (Windshield)"></div>
           <div class="form-group"><label>รหัสฟิล์ม</label><input id="fp_rCode" placeholder="NCP-70-WS"></div>
-          <div class="form-group"><label>ชื่อสี</label><input id="fp_rColorName" placeholder="Crystal Clear"></div>
           <div class="form-group"><label>VLT</label><input id="fp_rVlt" placeholder="70%"></div>
         </div>
         <div class="form-row">
@@ -859,9 +858,8 @@
         <div class="panel-title">🏷️ รหัสฟิล์ม</div>
         <input type="hidden" id="fs_rowId">
         <div class="form-row">
-          <div class="form-group"><label>ตำแหน่ง</label><input id="fs_rPos" placeholder="กระจกหน้า (Windshield)"></div>
+          <div class="form-group"><label>ความเข้มของฟิล์ม</label><input id="fs_rPos" placeholder="กระจกหน้า (Windshield)"></div>
           <div class="form-group"><label>รหัสฟิล์ม</label><input id="fs_rCode" placeholder="NC-70-WS"></div>
-          <div class="form-group"><label>ชื่อสี</label><input id="fs_rColorName" placeholder="Crystal Clear"></div>
           <div class="form-group"><label>VLT</label><input id="fs_rVlt" placeholder="70%"></div>
         </div>
         <div class="form-row">
@@ -5240,12 +5238,12 @@
         {id:'c6',code:'NCP-70',name:'Crystal Clear',vlt:'70%',bg:'#dddddd',fg:'#555555'}
       ],
       filmCodes: [
-        {id:'r1',position:'กระจกหน้า (Windshield)',code:'NCP-70-WS',colorName:'Crystal Clear',vlt:'70%',uv:'99%',ir:'97%',heat:'87%'},
-        {id:'r2',position:'กระจกข้าง (Side Window)',code:'NCP-35-SD',colorName:'Medium Smoke',vlt:'35%',uv:'99%',ir:'97%',heat:'87%'},
-        {id:'r3',position:'กระจกข้าง (Side Window)',code:'NCP-20-SD',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'97%',heat:'87%'},
-        {id:'r4',position:'กระจกหลัง (Rear Window)',code:'NCP-20-RW',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'97%',heat:'87%'},
-        {id:'r5',position:'กระจกหลัง (Rear Window)',code:'NCP-15-RW',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'97%',heat:'87%'},
-        {id:'r6',position:'กระจกหน้าต่างบน (Sunroof)',code:'NCP-15-SR',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'97%',heat:'87%'}
+        {id:'r1',position:'กระจกหน้า (Windshield)',code:'NCP-70-WS',vlt:'70%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r2',position:'กระจกข้าง (Side Window)',code:'NCP-35-SD',vlt:'35%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r3',position:'กระจกข้าง (Side Window)',code:'NCP-20-SD',vlt:'20%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r4',position:'กระจกหลัง (Rear Window)',code:'NCP-20-RW',vlt:'20%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r5',position:'กระจกหลัง (Rear Window)',code:'NCP-15-RW',vlt:'15%',uv:'99%',ir:'97%',heat:'87%'},
+        {id:'r6',position:'กระจกหน้าต่างบน (Sunroof)',code:'NCP-15-SR',vlt:'15%',uv:'99%',ir:'97%',heat:'87%'}
       ],
       specs: [
         {id:'s1',label:'UV Rejection (กันรังสี UV)',value:'99%',style:'highlight'},
@@ -5271,12 +5269,12 @@
         {id:'c6',code:'NC-70',name:'Crystal Clear',vlt:'70%',bg:'#dddddd',fg:'#555555'}
       ],
       filmCodes: [
-        {id:'r1',position:'กระจกหน้า (Windshield)',code:'NC-70-WS',colorName:'Crystal Clear',vlt:'70%',uv:'99%',ir:'95%',heat:'86.6%'},
-        {id:'r2',position:'กระจกข้าง (Side Window)',code:'NC-35-SD',colorName:'Medium Smoke',vlt:'35%',uv:'99%',ir:'95%',heat:'86.6%'},
-        {id:'r3',position:'กระจกข้าง (Side Window)',code:'NC-20-SD',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'95%',heat:'86.6%'},
-        {id:'r4',position:'กระจกหลัง (Rear Window)',code:'NC-20-RW',colorName:'Dark Smoke',vlt:'20%',uv:'99%',ir:'95%',heat:'86.6%'},
-        {id:'r5',position:'กระจกหลัง (Rear Window)',code:'NC-15-RW',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'95%',heat:'86.6%'},
-        {id:'r6',position:'กระจกหน้าต่างบน (Sunroof)',code:'NC-15-SR',colorName:'Ultra Dark',vlt:'15%',uv:'99%',ir:'95%',heat:'86.6%'}
+        {id:'r1',position:'กระจกหน้า (Windshield)',code:'NC-70-WS',vlt:'70%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r2',position:'กระจกข้าง (Side Window)',code:'NC-35-SD',vlt:'35%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r3',position:'กระจกข้าง (Side Window)',code:'NC-20-SD',vlt:'20%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r4',position:'กระจกหลัง (Rear Window)',code:'NC-20-RW',vlt:'20%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r5',position:'กระจกหลัง (Rear Window)',code:'NC-15-RW',vlt:'15%',uv:'99%',ir:'95%',heat:'86.6%'},
+        {id:'r6',position:'กระจกหน้าต่างบน (Sunroof)',code:'NC-15-SR',vlt:'15%',uv:'99%',ir:'95%',heat:'86.6%'}
       ],
       specs: [
         {id:'s1',label:'UV Rejection (กันรังสี UV)',value:'99%',style:'highlight'},
@@ -5396,16 +5394,15 @@
     const d = getFilmData(key);
     const editId = document.getElementById(pfx+'_rowId').value;
     const obj = {
-      id:        editId || 'r_' + Date.now(),
-      position:  document.getElementById(pfx+'_rPos').value.trim(),
-      code:      document.getElementById(pfx+'_rCode').value.trim(),
-      colorName: document.getElementById(pfx+'_rColorName').value.trim(),
-      vlt:       document.getElementById(pfx+'_rVlt').value.trim(),
-      uv:        document.getElementById(pfx+'_rUV').value.trim(),
-      ir:        document.getElementById(pfx+'_rIR').value.trim(),
-      heat:      document.getElementById(pfx+'_rHeat').value.trim()
+      id:       editId || 'r_' + Date.now(),
+      position: document.getElementById(pfx+'_rPos').value.trim(),
+      code:     document.getElementById(pfx+'_rCode').value.trim(),
+      vlt:      document.getElementById(pfx+'_rVlt').value.trim(),
+      uv:       document.getElementById(pfx+'_rUV').value.trim(),
+      ir:       document.getElementById(pfx+'_rIR').value.trim(),
+      heat:     document.getElementById(pfx+'_rHeat').value.trim()
     };
-    if (!obj.position || !obj.code) { showToast('⚠️ กรุณาใส่ตำแหน่งและรหัสฟิล์ม', true); return; }
+    if (!obj.position || !obj.code) { showToast('⚠️ กรุณาใส่ความเข้มและรหัสฟิล์ม', true); return; }
     if (editId) {
       const i = d.filmCodes.findIndex(r => r.id === editId);
       if (i >= 0) d.filmCodes[i] = obj; else d.filmCodes.push(obj);
@@ -5428,18 +5425,17 @@
     const d = getFilmData(key);
     const r = d.filmCodes.find(r => r.id === id);
     if (!r) return;
-    document.getElementById(pfx+'_rowId').value          = r.id;
-    document.getElementById(pfx+'_rPos').value           = r.position;
-    document.getElementById(pfx+'_rCode').value          = r.code;
-    document.getElementById(pfx+'_rColorName').value     = r.colorName;
-    document.getElementById(pfx+'_rVlt').value           = r.vlt;
-    document.getElementById(pfx+'_rUV').value            = r.uv;
-    document.getElementById(pfx+'_rIR').value            = r.ir;
-    document.getElementById(pfx+'_rHeat').value          = r.heat;
+    document.getElementById(pfx+'_rowId').value = r.id;
+    document.getElementById(pfx+'_rPos').value  = r.position;
+    document.getElementById(pfx+'_rCode').value = r.code;
+    document.getElementById(pfx+'_rVlt').value  = r.vlt;
+    document.getElementById(pfx+'_rUV').value   = r.uv;
+    document.getElementById(pfx+'_rIR').value   = r.ir;
+    document.getElementById(pfx+'_rHeat').value = r.heat;
   }
 
   function clearFilmCodeForm(pfx) {
-    ['_rowId','_rPos','_rCode','_rColorName','_rVlt','_rUV','_rIR','_rHeat'].forEach(s => {
+    ['_rowId','_rPos','_rCode','_rVlt','_rUV','_rIR','_rHeat'].forEach(s => {
       const el = document.getElementById(pfx+s); if (el) el.value = '';
     });
   }
@@ -5450,9 +5446,8 @@
     if (!el) return;
     el.innerHTML = `<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
       <thead><tr style="background:rgba(0,180,216,0.15);">
-        <th style="padding:8px 12px;text-align:left;white-space:nowrap;">ตำแหน่ง</th>
+        <th style="padding:8px 12px;text-align:left;white-space:nowrap;">ความเข้มของฟิล์ม</th>
         <th style="padding:8px 12px;">รหัส</th>
-        <th style="padding:8px 12px;">สี</th>
         <th style="padding:8px 12px;">VLT</th>
         <th style="padding:8px 12px;">UV</th>
         <th style="padding:8px 12px;">IR</th>
@@ -5462,7 +5457,6 @@
       ${d.filmCodes.map(r => `<tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
         <td style="padding:8px 12px;color:#e2e8f0;">${escAdmin(r.position)}</td>
         <td style="padding:8px 12px;font-family:monospace;color:#00b4d8;">${escAdmin(r.code)}</td>
-        <td style="padding:8px 12px;">${escAdmin(r.colorName)}</td>
         <td style="padding:8px 12px;">${escAdmin(r.vlt)}</td>
         <td style="padding:8px 12px;">${escAdmin(r.uv)}</td>
         <td style="padding:8px 12px;">${escAdmin(r.ir)}</td>
