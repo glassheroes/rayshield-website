@@ -137,7 +137,8 @@
 
     /* ── FILM COLORS ── */
     #colors { background: #fff; }
-    .colors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-top: 40px; }
+    .colors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    @media (max-width: 640px) { .colors-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
     .color-card {
       background: #fff; border-radius: var(--radius);
       overflow: hidden; box-shadow: var(--shadow);
