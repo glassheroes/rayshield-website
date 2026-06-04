@@ -362,9 +362,8 @@
         <table class="codes-table" role="table">
           <thead>
             <tr>
-              <th>ตำแหน่ง / Film Position</th>
+              <th>ความเข้มของฟิล์ม</th>
               <th>รหัสฟิล์ม</th>
-              <th>ชื่อสี</th>
               <th>VLT%</th>
               <th>UV Reject</th>
               <th>IR Reject</th>
@@ -375,42 +374,36 @@
             <tr>
               <td>กระจกหน้า (Windshield)</td>
               <td><span class="film-code">NCP-70-WS</span></td>
-              <td>Crystal Clear</td>
               <td><span class="vlt-badge" style="background:rgba(0,119,182,0.08);color:#0077B6;">70%</span></td>
               <td>99%</td><td>97%</td><td>87%</td>
             </tr>
             <tr>
               <td>กระจกข้าง (Side Window)</td>
               <td><span class="film-code">NCP-35-SD</span></td>
-              <td>Medium Smoke</td>
               <td><span class="vlt-badge" style="background:rgba(100,116,139,0.1);color:#475569;">35%</span></td>
               <td>99%</td><td>97%</td><td>87%</td>
             </tr>
             <tr>
               <td>กระจกข้าง (Side Window)</td>
               <td><span class="film-code">NCP-20-SD</span></td>
-              <td>Dark Smoke</td>
               <td><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
               <td>99%</td><td>97%</td><td>87%</td>
             </tr>
             <tr>
               <td>กระจกหลัง (Rear Window)</td>
               <td><span class="film-code">NCP-20-RW</span></td>
-              <td>Dark Smoke</td>
               <td><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
               <td>99%</td><td>97%</td><td>87%</td>
             </tr>
             <tr>
               <td>กระจกหลัง (Rear Window)</td>
               <td><span class="film-code">NCP-15-RW</span></td>
-              <td>Ultra Dark</td>
               <td><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
               <td>99%</td><td>97%</td><td>87%</td>
             </tr>
             <tr>
               <td>กระจกหน้าต่างบน (Sunroof)</td>
               <td><span class="film-code">NCP-15-SR</span></td>
-              <td>Ultra Dark</td>
               <td><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
               <td>99%</td><td>97%</td><td>87%</td>
             </tr>
@@ -537,7 +530,6 @@
         return '<tr>' +
           '<td>'+esc(r.position)+'</td>' +
           '<td><span class="film-code">'+esc(r.code)+'</span></td>' +
-          '<td>'+esc(r.colorName)+'</td>' +
           '<td>'+esc(r.vlt)+'</td>' +
           '<td>'+esc(r.uv)+'</td>' +
           '<td>'+esc(r.ir)+'</td>' +
