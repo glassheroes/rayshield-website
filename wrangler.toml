@@ -23,5 +23,6 @@ id = "292bb5fc24a048d7a9e381e83db5bae6"
 # ADMIN_TOKEN ใน production ให้ตั้งใน Cloudflare Dashboard:
 #   Pages → rayshield-website → Settings → Environment variables
 # ──────────────────────────────────────────────────────────────
-[vars]
-ADMIN_TOKEN = "rayshield@2026"
+# ADMIN_TOKEN is set as a Pages Secret (wrangler pages secret put)
+# Do NOT redeclare it here in [vars] — that causes a name-collision error.
+# For local dev: wrangler pages dev . --binding ADMIN_TOKEN=rayshield@2026
