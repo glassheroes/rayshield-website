@@ -8,15 +8,15 @@ pages_build_output_dir = "."
 # ──────────────────────────────────────────────────────────────
 [[kv_namespaces]]
 binding = "RS_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+id = "292bb5fc24a048d7a9e381e83db5bae6"
 
 # ──────────────────────────────────────────────────────────────
 # Cloudflare R2 — เก็บรูปภาพ reviews
 # สร้าง bucket ด้วย: wrangler r2 bucket create rayshield-images
 # ──────────────────────────────────────────────────────────────
-[[r2_buckets]]
-binding = "RS_R2"
-bucket_name = "rayshield-images"
+# [[r2_buckets]]          ← เปิดใช้เมื่อ enable R2 ใน Cloudflare Dashboard แล้ว
+# binding = "RS_R2"
+# bucket_name = "rayshield-images"
 
 # ──────────────────────────────────────────────────────────────
 # สำหรับ local dev เท่านั้น (wrangler pages dev .)
