@@ -622,7 +622,40 @@
     .sitemap-page-row { display:flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(255,255,255,.04); border-radius:8px; }
     .sitemap-page-row label { flex:1; font-size:.84rem; color:rgba(255,255,255,.8); cursor:pointer; }
     .sitemap-page-row select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); color:#fff; border-radius:6px; padding:4px 6px; font-size:.78rem; font-family:inherit; }
+
+    /* ── OVERVIEW DASHBOARD ── */
+    .ov-welcome { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:20px; padding:18px 22px; background:linear-gradient(135deg,rgba(0,119,182,.18),rgba(0,180,216,.10)); border:1px solid rgba(0,180,216,.2); border-radius:16px; }
+    .ov-welcome-left h2 { font-size:1.15rem; font-weight:800; margin:0 0 2px; }
+    .ov-welcome-left p  { font-size:0.8rem; color:rgba(255,255,255,.5); margin:0; }
+    .ov-welcome-right a { font-size:0.78rem; color:var(--cyan); text-decoration:none; padding:6px 12px; border:1px solid rgba(0,180,216,.35); border-radius:8px; }
+    .ov-stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+    @media(max-width:900px){ .ov-stats-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:540px){ .ov-stats-grid { grid-template-columns:1fr 1fr; } }
+    .ov-stat { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:16px 18px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:background .18s; }
+    .ov-stat:hover { background:rgba(255,255,255,.1); }
+    .ov-stat-icon { font-size:1.7rem; flex-shrink:0; }
+    .ov-stat-num  { font-size:1.55rem; font-weight:800; color:#fff; line-height:1.1; }
+    .ov-stat-lbl  { font-size:0.74rem; color:rgba(255,255,255,.5); margin-top:2px; }
+    .ov-stat-sub  { font-size:0.68rem; color:rgba(255,255,255,.3); margin-top:1px; }
+    .ov-two-col   { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+    @media(max-width:700px){ .ov-two-col { grid-template-columns:1fr; } }
+    .ov-recent-item { display:flex; align-items:flex-start; gap:10px; padding:9px 10px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.05); margin-bottom:6px; }
+    .ov-recent-item:last-child { margin-bottom:0; }
+    .ov-recent-icon { font-size:1rem; flex-shrink:0; padding-top:1px; }
+    .ov-recent-title { font-size:.83rem; color:rgba(255,255,255,.85); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ov-recent-sub   { font-size:.70rem; color:rgba(255,255,255,.38); margin-top:2px; }
+    .ov-qa-grid { display:flex; flex-wrap:wrap; gap:8px; }
+    .ov-qa-btn  { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); color:rgba(255,255,255,.75); font-size:.82rem; cursor:pointer; font-family:inherit; transition:all .18s; }
+    .ov-qa-btn:hover { background:rgba(255,255,255,.13); color:#fff; border-color:rgba(255,255,255,.25); }
+    .ov-health-item { display:flex; align-items:center; gap:9px; font-size:.82rem; color:rgba(255,255,255,.7); padding:5px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+    .ov-health-item:last-child { border-bottom:none; }
+    .ov-hdot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .ov-hdot.ok   { background:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.5); }
+    .ov-hdot.warn { background:#facc15; box-shadow:0 0 6px rgba(250,204,21,.4); }
+    /* map embed hint */
+    .field-hint { font-size:.75rem; color:rgba(255,255,255,.35); margin-top:4px; }
   </style>
+  <script src="js/cf-sync.js"></script>
 </head>
 <body>
 
@@ -665,10 +698,17 @@
     <!-- ── SIDEBAR ── -->
     <aside class="admin-sidebar" aria-label="เมนูจัดการ">
 
+      <!-- กลุ่ม: ภาพรวม -->
+      <div class="sidebar-group">
+        <button class="sidebar-btn active" onclick="switchAdminTab('overview')" id="tabBtnOverview">
+          <span class="sb-icon">🏠</span>ภาพรวม
+        </button>
+      </div>
+
       <!-- กลุ่ม: เนื้อหา -->
       <div class="sidebar-group">
         <div class="sidebar-group-label">เนื้อหา</div>
-        <button class="sidebar-btn active" onclick="switchAdminTab('articles')" id="tabBtnArticles">
+        <button class="sidebar-btn" onclick="switchAdminTab('articles')" id="tabBtnArticles">
           <span class="sb-icon">📝</span>บทความ
         </button>
         <button class="sidebar-btn" onclick="switchAdminTab('promos')" id="tabBtnPromos">
@@ -730,6 +770,110 @@
     <!-- ── CONTENT ── -->
     <div class="admin-content">
 
+    <!-- ══════════════════════════════════════════
+         TAB: OVERVIEW DASHBOARD
+    ══════════════════════════════════════════ -->
+    <div id="tabOverview">
+
+      <!-- Welcome -->
+      <div class="ov-welcome">
+        <div class="ov-welcome-left">
+          <h2>👋 สวัสดี, ผู้ดูแลระบบ Ray-Shield</h2>
+          <p id="ovDate">—</p>
+        </div>
+        <div class="ov-welcome-right">
+          <a href="index.html" target="_blank">🌐 เปิดเว็บไซต์ →</a>
+        </div>
+      </div>
+
+      <!-- Stats cards -->
+      <div class="ov-stats-grid">
+        <div class="ov-stat" onclick="switchAdminTab('stats')">
+          <span class="ov-stat-icon">👁️</span>
+          <div>
+            <div class="ov-stat-num" id="ovVisitsToday">—</div>
+            <div class="ov-stat-lbl">ยอดเข้าชมวันนี้</div>
+          </div>
+        </div>
+        <div class="ov-stat" onclick="switchAdminTab('stats')">
+          <span class="ov-stat-icon">📅</span>
+          <div>
+            <div class="ov-stat-num" id="ovVisits30">—</div>
+            <div class="ov-stat-lbl">30 วันล่าสุด</div>
+          </div>
+        </div>
+        <div class="ov-stat" onclick="switchAdminTab('articles')">
+          <span class="ov-stat-icon">📝</span>
+          <div>
+            <div class="ov-stat-num" id="ovArticles">—</div>
+            <div class="ov-stat-lbl">บทความ</div>
+            <div class="ov-stat-sub" id="ovArticlesSub"></div>
+          </div>
+        </div>
+        <div class="ov-stat" onclick="switchAdminTab('reviews')">
+          <span class="ov-stat-icon">⭐</span>
+          <div>
+            <div class="ov-stat-num" id="ovReviews">—</div>
+            <div class="ov-stat-lbl">รีวิวลูกค้า</div>
+            <div class="ov-stat-sub" id="ovReviewsSub"></div>
+          </div>
+        </div>
+        <div class="ov-stat" onclick="switchAdminTab('branches')">
+          <span class="ov-stat-icon">📍</span>
+          <div>
+            <div class="ov-stat-num" id="ovBranches">—</div>
+            <div class="ov-stat-lbl">สาขา</div>
+            <div class="ov-stat-sub" id="ovBranchesSub"></div>
+          </div>
+        </div>
+        <div class="ov-stat" onclick="switchAdminTab('promos')">
+          <span class="ov-stat-icon">🎁</span>
+          <div>
+            <div class="ov-stat-num" id="ovPromos">—</div>
+            <div class="ov-stat-lbl">โปรโมชั่น</div>
+            <div class="ov-stat-sub" id="ovPromosSub"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent activity -->
+      <div class="ov-two-col">
+        <div class="panel" style="padding:20px;">
+          <div class="panel-title" style="margin-bottom:14px;padding-bottom:10px;">📝 บทความล่าสุด</div>
+          <div id="ovRecentArticles"></div>
+        </div>
+        <div class="panel" style="padding:20px;">
+          <div class="panel-title" style="margin-bottom:14px;padding-bottom:10px;">⭐ รีวิวล่าสุด</div>
+          <div id="ovRecentReviews"></div>
+        </div>
+      </div>
+
+      <!-- Quick actions + Health check -->
+      <div class="ov-two-col">
+        <div class="panel" style="padding:20px;">
+          <div class="panel-title" style="margin-bottom:14px;padding-bottom:10px;">⚡ Quick Actions</div>
+          <div class="ov-qa-grid">
+            <button class="ov-qa-btn" onclick="switchAdminTab('articles')">📝 + บทความ</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('promos')">🎁 + โปรโมชั่น</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('reviews')">⭐ + รีวิว</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('branches')">📍 + สาขา</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('homepage')">🎨 แก้หน้าแรก</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('stats')">📈 ดูสถิติ</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('seo')">🔍 ตั้งค่า SEO</button>
+            <button class="ov-qa-btn" onclick="switchAdminTab('backup')">💾 Backup</button>
+          </div>
+        </div>
+        <div class="panel" style="padding:20px;">
+          <div class="panel-title" style="margin-bottom:14px;padding-bottom:10px;">
+            🩺 Health Check
+            <span style="font-size:.7rem;font-weight:400;color:rgba(255,255,255,.35);margin-left:auto;" id="ovLastUpdated"></span>
+          </div>
+          <div id="ovHealthList"></div>
+        </div>
+      </div>
+
+    </div><!-- /tabOverview -->
+
     <!-- ── TAB: FILM PLUS ── -->
     <div id="tabFilmPlus" style="display:none;">
       <h2 style="font-size:1.1rem;font-weight:800;color:var(--cyan);margin-bottom:20px;">🎞 จัดการฟิล์ม Nano Ceramic Plus</h2>
@@ -780,6 +924,9 @@
           <div class="form-group"><label>UV Reject</label><input id="fp_rUV" placeholder="99%"></div>
           <div class="form-group"><label>IR Reject</label><input id="fp_rIR" placeholder="97%"></div>
           <div class="form-group"><label>Heat Reject</label><input id="fp_rHeat" placeholder="87%"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>TSER (Total Solar Energy Rejected)</label><input id="fp_rTser" placeholder="60%"></div>
         </div>
         <div class="form-actions">
           <button class="btn btn-primary" onclick="saveFilmCode('rs_film_plus','fp')">➕ เพิ่ม/บันทึก</button>
@@ -867,6 +1014,9 @@
           <div class="form-group"><label>IR Reject</label><input id="fs_rIR" placeholder="95%"></div>
           <div class="form-group"><label>Heat Reject</label><input id="fs_rHeat" placeholder="86.6%"></div>
         </div>
+        <div class="form-row">
+          <div class="form-group"><label>TSER (Total Solar Energy Rejected)</label><input id="fs_rTser" placeholder="55%"></div>
+        </div>
         <div class="form-actions">
           <button class="btn btn-primary" onclick="saveFilmCode('rs_film_std','fs')">➕ เพิ่ม/บันทึก</button>
           <button class="btn btn-ghost" onclick="clearFilmCodeForm('fs')">ล้างฟอร์ม</button>
@@ -903,7 +1053,7 @@
     </div>
 
     <!-- ── TAB: ARTICLES ── -->
-    <div id="tabArticles">
+    <div id="tabArticles" style="display:none;">
     <!-- Stats -->
     <div class="stats-row">
       <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">บทความทั้งหมด</div></div>
@@ -1633,6 +1783,16 @@
           </button>
         </div>
 
+        <!-- ── CLOUD SYNC ── -->
+        <div class="bk-section" id="cloudSyncSection">
+          <div class="bk-section-title">☁️ ซิงค์ข้อมูลขึ้น Cloudflare KV</div>
+          <p class="bk-section-desc">อัปโหลดข้อมูลทั้งหมดจาก localStorage ขึ้น Cloudflare KV เพื่อให้ทุกอุปกรณ์เห็นข้อมูลเดียวกัน ทำครั้งเดียวหลังตั้งค่า KV Binding ครั้งแรก</p>
+          <button class="btn btn-primary" onclick="runCloudMigration()" id="btnCloudMigrate" style="padding:12px 28px;">
+            ☁️ Migrate ข้อมูลขึ้น Cloud ทันที
+          </button>
+          <div id="cloudMigrateStatus" style="margin-top:10px;font-size:.85rem;color:rgba(255,255,255,.6);"></div>
+        </div>
+
         <!-- ── IMPORT / RESTORE ── -->
         <div class="bk-section">
           <div class="bk-section-title">📂 กู้คืนข้อมูล (Restore)</div>
@@ -1945,6 +2105,11 @@
           <div class="form-group">
             <label>ลิงก์ Google Maps</label>
             <input type="url" id="branchMaps" placeholder="https://maps.app.goo.gl/..." />
+          </div>
+          <div class="form-group">
+            <label>Google Maps Embed URL (แสดงแผนที่ในการ์ด)</label>
+            <input type="text" id="branchMapEmbed" placeholder="https://www.google.com/maps/embed?pb=..." />
+            <div class="field-hint">วางเฉพาะ URL ที่อยู่ใน src="..." ของ embed code — ไม่ต้องใส่ทั้ง &lt;iframe&gt;</div>
           </div>
           <div class="form-group">
             <label>URL รูปภาพสาขา (ไม่บังคับ)</label>
@@ -2552,12 +2717,14 @@
       localStorage.removeItem(AUTH_FAIL_KEY);
       const expiry = Date.now() + SESSION_TTL_MS;
       sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify({ expiry }));
+      if (typeof cfSync !== 'undefined') cfSync.setAdminToken(entered);
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminScreen').style.display = 'block';
       document.getElementById('loginErr').style.display = 'none';
       document.getElementById('lockMsg').style.display = 'none';
       checkScheduledPublish();
       renderList();
+      loadOverviewDashboard();
       startScheduleWatcher();
     } else {
       // Login ผิด
@@ -2605,6 +2772,8 @@
         if (sess.expiry && Date.now() < sess.expiry) {
           document.getElementById('loginScreen').style.display = 'none';
           document.getElementById('adminScreen').style.display = 'block';
+          if (typeof cfSync !== 'undefined') cfSync.setAdminToken(getAdminPass());
+          loadOverviewDashboard();
           return;
         }
       }
@@ -3234,7 +3403,7 @@
   }
 
   function switchAdminTab(tab) {
-    const TABS = ['articles','seo','tags','stats','settings','backup','promos','reviews','branches','faq','popup','homepage','contact','film-plus','film-std'];
+    const TABS = ['overview','articles','seo','tags','stats','settings','backup','promos','reviews','branches','faq','popup','homepage','contact','film-plus','film-std'];
     /* ID map: tab name → { btn, pane } element IDs */
     const ID_MAP = {
       'film-plus': { btn: 'tabBtnFilmPlus', pane: 'tabFilmPlus' },
@@ -3247,6 +3416,7 @@
       if (btn)  btn.classList.toggle('active', t === tab);
       if (pane) pane.style.display = t === tab ? '' : 'none';
     });
+    if (tab === 'overview')  loadOverviewDashboard();
     if (tab === 'tags')     loadTagsForm();
     if (tab === 'stats')    renderStats();
     if (tab === 'settings') loadSettingsForm();
@@ -3758,6 +3928,30 @@
     showToast('📥 ดาวน์โหลด Backup เรียบร้อย');
   }
 
+  async function runCloudMigration() {
+    const btn = document.getElementById('btnCloudMigrate');
+    const status = document.getElementById('cloudMigrateStatus');
+    if (typeof cfSync === 'undefined') {
+      status.textContent = '❌ cf-sync.js ไม่ได้โหลด — ตรวจสอบ Cloudflare Pages Binding';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = '⏳ กำลัง Migrate...';
+    status.textContent = '';
+    try {
+      await cfSync.migrateToKV();
+      status.style.color = '#4ade80';
+      status.textContent = '✅ Migrate สำเร็จ! ข้อมูลทั้งหมดอยู่บน Cloudflare KV แล้ว';
+      showToast('☁️ Migrate ข้อมูลขึ้น Cloud สำเร็จ');
+    } catch (err) {
+      status.style.color = '#f87171';
+      status.textContent = '❌ เกิดข้อผิดพลาด: ' + (err.message || err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '☁️ Migrate ข้อมูลขึ้น Cloud ทันที';
+    }
+  }
+
   function onRestoreFileChange(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -4004,6 +4198,13 @@
     });
   }
   function rsSaveImg(base64) {
+    if (typeof cfSync !== 'undefined' && cfSync.uploadImageToR2) {
+      const fname = 'review_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) + '.jpg';
+      return cfSync.uploadImageToR2(base64, fname).catch(() => _rsSaveImgIDB(base64));
+    }
+    return _rsSaveImgIDB(base64);
+  }
+  function _rsSaveImgIDB(base64) {
     return rsOpenIDB().then(db => new Promise((res, rej) => {
       const id = 'img_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
       const tx = db.transaction('imgs', 'readwrite');
@@ -4388,8 +4589,9 @@
       addr:   document.getElementById('branchAddr').value.trim(),
       hours:  document.getElementById('branchHours').value.trim(),
       tel:    document.getElementById('branchTel').value.trim(),
-      maps:   document.getElementById('branchMaps').value.trim(),
-      img:    document.getElementById('branchImg').value.trim(),
+      maps:     document.getElementById('branchMaps').value.trim(),
+      mapEmbed: document.getElementById('branchMapEmbed').value.trim(),
+      img:      document.getElementById('branchImg').value.trim(),
       isHq:   document.getElementById('branchIsHq').value === '1',
       status: document.getElementById('branchStatus').value,
     };
@@ -4407,7 +4609,7 @@
   }
 
   function clearBranchForm() {
-    ['branchName','branchEmoji','branchAddr','branchHours','branchTel','branchMaps','branchImg'].forEach(id => document.getElementById(id).value = '');
+    ['branchName','branchEmoji','branchAddr','branchHours','branchTel','branchMaps','branchMapEmbed','branchImg'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('branchIsHq').value    = '0';
     document.getElementById('branchStatus').value  = 'active';
     document.getElementById('branchEditId').value  = '';
@@ -4424,8 +4626,9 @@
     document.getElementById('branchAddr').value   = b.addr   || '';
     document.getElementById('branchHours').value  = b.hours  || '';
     document.getElementById('branchTel').value    = b.tel    || '';
-    document.getElementById('branchMaps').value   = b.maps   || '';
-    document.getElementById('branchImg').value    = b.img    || '';
+    document.getElementById('branchMaps').value     = b.maps     || '';
+    document.getElementById('branchMapEmbed').value = b.mapEmbed || '';
+    document.getElementById('branchImg').value      = b.img      || '';
     document.getElementById('branchIsHq').value   = b.isHq ? '1' : '0';
     document.getElementById('branchStatus').value = b.status || 'active';
     document.getElementById('branchFormTitle').textContent = 'แก้ไขสาขา';
@@ -4464,7 +4667,7 @@
         <div class="mgmt-item-info">
           <div class="mgmt-item-title">${b.isHq ? '🏢 ' : '📍 '}${escHtml(b.name)}</div>
           <div class="mgmt-item-sub">${escHtml(b.addr||'').substring(0,60)}${(b.addr||'').length>60?'…':''}</div>
-          <div class="mgmt-item-sub">${escHtml(b.tel||'')} · <span style="color:${b.status==='active'?'var(--green)':'rgba(255,255,255,0.35)'};">${b.status==='active'?'แสดง':'ซ่อน'}</span></div>
+          <div class="mgmt-item-sub">${escHtml(b.tel||'')} · <span style="color:${b.status==='active'?'var(--green)':'rgba(255,255,255,0.35)'};">${b.status==='active'?'แสดง':'ซ่อน'}</span>${b.mapEmbed?` · <span style="color:var(--cyan);font-size:.72rem;">🗺️ Embed</span>`:''}</div>
         </div>
         <div class="mgmt-item-actions">
           <button class="btn btn-sm btn-ghost" onclick="editBranch('${b.id}')">✏️</button>
@@ -5400,7 +5603,8 @@
       vlt:      document.getElementById(pfx+'_rVlt').value.trim(),
       uv:       document.getElementById(pfx+'_rUV').value.trim(),
       ir:       document.getElementById(pfx+'_rIR').value.trim(),
-      heat:     document.getElementById(pfx+'_rHeat').value.trim()
+      heat:     document.getElementById(pfx+'_rHeat').value.trim(),
+      tser:     document.getElementById(pfx+'_rTser').value.trim()
     };
     if (!obj.position || !obj.code) { showToast('⚠️ กรุณาใส่ความเข้มและรหัสฟิล์ม', true); return; }
     if (editId) {
@@ -5432,10 +5636,11 @@
     document.getElementById(pfx+'_rUV').value   = r.uv;
     document.getElementById(pfx+'_rIR').value   = r.ir;
     document.getElementById(pfx+'_rHeat').value = r.heat;
+    document.getElementById(pfx+'_rTser').value = r.tser || '';
   }
 
   function clearFilmCodeForm(pfx) {
-    ['_rowId','_rPos','_rCode','_rVlt','_rUV','_rIR','_rHeat'].forEach(s => {
+    ['_rowId','_rPos','_rCode','_rVlt','_rUV','_rIR','_rHeat','_rTser'].forEach(s => {
       const el = document.getElementById(pfx+s); if (el) el.value = '';
     });
   }
@@ -5452,6 +5657,7 @@
         <th style="padding:8px 12px;">UV</th>
         <th style="padding:8px 12px;">IR</th>
         <th style="padding:8px 12px;">Heat</th>
+        <th style="padding:8px 12px;">TSER</th>
         <th style="padding:8px 12px;">จัดการ</th>
       </tr></thead><tbody>
       ${d.filmCodes.map(r => `<tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -5461,6 +5667,7 @@
         <td style="padding:8px 12px;">${escAdmin(r.uv)}</td>
         <td style="padding:8px 12px;">${escAdmin(r.ir)}</td>
         <td style="padding:8px 12px;">${escAdmin(r.heat)}</td>
+        <td style="padding:8px 12px;">${escAdmin(r.tser||'—')}</td>
         <td style="padding:8px 12px;white-space:nowrap;">
           <button class="btn btn-sm btn-ghost" onclick="editFilmCode('${key}','${pfx}','${r.id}')">✏️</button>
           <button class="btn btn-sm btn-danger" onclick="deleteFilmCode('${key}','${pfx}','${r.id}')">🗑️</button>
@@ -5535,6 +5742,104 @@
     renderFilmColors(key, pfx);
     renderFilmCodes(key, pfx);
     renderFilmSpecs(key, pfx);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     OVERVIEW DASHBOARD
+  ══════════════════════════════════════════════════════ */
+  function loadOverviewDashboard() {
+    function pLS(k, fb) { try { return JSON.parse(localStorage.getItem(k)||'null')||fb; } catch { return fb; } }
+
+    // Date
+    const now = new Date();
+    const dayNames = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+    const monthNames = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+    const ovDate = document.getElementById('ovDate');
+    if (ovDate) ovDate.textContent = `วัน${dayNames[now.getDay()]}ที่ ${now.getDate()} ${monthNames[now.getMonth()]} ${now.getFullYear() + 543}`;
+
+    const todayStr = now.toISOString().split('T')[0];
+    const d30 = new Date(now); d30.setDate(d30.getDate() - 30);
+    const d30str = d30.toISOString().split('T')[0];
+
+    // Visits
+    const visits = pLS('rs_visits', []);
+    const todayV = visits.filter(v => v.d === todayStr).length;
+    const v30    = visits.filter(v => v.d >= d30str).length;
+    const el = id => document.getElementById(id);
+    if (el('ovVisitsToday')) el('ovVisitsToday').textContent = todayV;
+    if (el('ovVisits30'))    el('ovVisits30').textContent    = v30;
+
+    // Articles
+    const articles = pLS('rs_articles', []);
+    const pubA = articles.filter(a => a.status === 'published').length;
+    const dftA = articles.filter(a => a.status === 'draft').length;
+    if (el('ovArticles'))    el('ovArticles').textContent    = articles.length;
+    if (el('ovArticlesSub')) el('ovArticlesSub').textContent = `เผยแพร่ ${pubA} · ร่าง ${dftA}`;
+
+    // Reviews
+    const reviews = pLS('rs_reviews', []);
+    const actR = reviews.filter(r => r.status !== 'hidden').length;
+    if (el('ovReviews'))    el('ovReviews').textContent    = reviews.length;
+    if (el('ovReviewsSub')) el('ovReviewsSub').textContent = `แสดง ${actR}`;
+
+    // Branches
+    const branches = pLS('rs_branches', []);
+    const actB = branches.filter(b => b.status === 'active').length;
+    if (el('ovBranches'))    el('ovBranches').textContent    = branches.length;
+    if (el('ovBranchesSub')) el('ovBranchesSub').textContent = `active ${actB}`;
+
+    // Promos
+    const promos = pLS('rs_promotions', []);
+    const actP = promos.filter(p => p.status === 'active').length;
+    if (el('ovPromos'))    el('ovPromos').textContent    = promos.length;
+    if (el('ovPromosSub')) el('ovPromosSub').textContent = `active ${actP}`;
+
+    // Recent articles
+    const sortedA = [...articles].sort((a,b) =>
+      (b.updatedAt||b.createdAt||'').localeCompare(a.updatedAt||a.createdAt||'')).slice(0,5);
+    const raEl = el('ovRecentArticles');
+    if (raEl) raEl.innerHTML = sortedA.length
+      ? sortedA.map(a => `<div class="ov-recent-item">
+          <span class="ov-recent-icon">${a.status==='published'?'✅':'📝'}</span>
+          <div style="min-width:0;">
+            <div class="ov-recent-title">${escHtml(a.title||'ไม่มีชื่อ')}</div>
+            <div class="ov-recent-sub">${a.status==='published'?'เผยแพร่':'ฉบับร่าง'} · ${a.updatedAt||a.createdAt||''}</div>
+          </div></div>`).join('')
+      : '<div style="color:rgba(255,255,255,.35);font-size:.84rem;padding:10px 0;">ยังไม่มีบทความ</div>';
+
+    // Recent reviews
+    const sortedR = [...reviews].sort((a,b) =>
+      (b.date||'').localeCompare(a.date||'')).slice(0,5);
+    const rrEl = el('ovRecentReviews');
+    if (rrEl) rrEl.innerHTML = sortedR.length
+      ? sortedR.map(r => `<div class="ov-recent-item">
+          <span class="ov-recent-icon" style="font-size:.8rem;">${'⭐'.repeat(Math.min(r.rating||5,5))}</span>
+          <div style="min-width:0;">
+            <div class="ov-recent-title">${escHtml(r.name||'ไม่ระบุชื่อ')}</div>
+            <div class="ov-recent-sub">${escHtml(r.model||'')}${r.model&&r.date?' · ':''}${r.date||''}</div>
+          </div></div>`).join('')
+      : '<div style="color:rgba(255,255,255,.35);font-size:.84rem;padding:10px 0;">ยังไม่มีรีวิว</div>';
+
+    // Health check
+    const seo = pLS('rs_seo', {});
+    const favicon = localStorage.getItem('rs_site_favicon');
+    const health = [
+      { ok: !!(seo.title),    label: `SEO Title: "${(seo.title||'').substring(0,28)}"`,   warn: 'ยังไม่ตั้งค่า SEO Title' },
+      { ok: !!favicon,        label: 'Favicon ตั้งค่าแล้ว',                              warn: 'ยังไม่มี Favicon' },
+      { ok: pubA > 0,         label: `บทความเผยแพร่ ${pubA} รายการ`,                     warn: 'ยังไม่มีบทความที่เผยแพร่' },
+      { ok: actR > 0,         label: `รีวิวที่แสดง ${actR} รายการ`,                      warn: 'ยังไม่มีรีวิวที่แสดง' },
+      { ok: actB > 0,         label: `สาขา active ${actB} แห่ง`,                         warn: 'ยังไม่มีสาขา active' },
+      { ok: !!(seo.sitemapBase), label: 'Sitemap Base URL ตั้งค่าแล้ว',                  warn: 'ยังไม่ตั้งค่า Sitemap Base URL' },
+    ];
+    const hlEl = el('ovHealthList');
+    if (hlEl) hlEl.innerHTML = health.map(h => `
+      <div class="ov-health-item">
+        <span class="ov-hdot ${h.ok?'ok':'warn'}"></span>
+        <span>${h.ok ? h.label : h.warn}</span>
+      </div>`).join('');
+
+    const lu = el('ovLastUpdated');
+    if (lu) lu.textContent = 'อัปเดต ' + now.toLocaleTimeString('th-TH', {hour:'2-digit',minute:'2-digit'});
   }
 
   /* เพิ่ม film tab handlers เข้า switchAdminTab โดยตรง */

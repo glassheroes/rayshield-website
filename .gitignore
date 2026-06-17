@@ -13,3 +13,6 @@ desktop.ini
 
 # Node (ถ้ามีในอนาคต)
 node_modules/
+
+# Claude Code project files
+.claude/

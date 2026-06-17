@@ -93,6 +93,22 @@
     .hero-spec .lbl { font-size: 0.76rem; color: var(--muted); margin-top: 4px; }
     .hero-divider { width: 1px; height: 44px; background: var(--border); align-self: center; }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Mobile fixes ── */
+    @media (max-width: 768px) {
+      .film-hero { padding: 100px 0 48px; }
+    }
+    @media (max-width: 480px) {
+      .film-hero { padding: 88px 0 36px; }
+      .hero-divider { display: none; }
+      .hero-specs { gap: 12px 20px; }
+      .hero-spec .num { font-size: 1.4rem; }
+      .hero-actions { flex-direction: column; }
+      .btn-book, .btn-line { justify-content: center; width: 100%; }
+      .nav-book { display: none; }
+      .nav-back { font-size: 0.82rem; padding: 7px 12px; }
+      .nav-container { padding: 0 14px; }
+    }
     .btn-book {
       display: inline-flex; align-items: center; gap: 8px;
       background: linear-gradient(135deg, var(--gold), #E07B10);
@@ -222,6 +238,7 @@
     footer p { font-size: 0.82rem; color: #94A3B8; }
     footer a { color: var(--blue); font-weight: 600; }
   </style>
+  <script src="js/cf-sync.js"></script>
 </head>
 <body>
 
@@ -420,6 +437,7 @@
               <th>UV Reject</th>
               <th>IR Reject</th>
               <th>Heat Reject</th>
+              <th>TSER</th>
             </tr>
           </thead>
           <tbody id="filmCodesBody">
@@ -427,37 +445,37 @@
               <td>กระจกหน้า (Windshield)</td>
               <td><span class="film-code">NCP-70-WS</span></td>
               <td><span class="vlt-badge" style="background:rgba(0,119,182,0.08);color:#0077B6;">70%</span></td>
-              <td>99%</td><td>97%</td><td>87%</td>
+              <td>99%</td><td>97%</td><td>87%</td><td>—</td>
             </tr>
             <tr>
               <td>กระจกข้าง (Side Window)</td>
               <td><span class="film-code">NCP-35-SD</span></td>
               <td><span class="vlt-badge" style="background:rgba(100,116,139,0.1);color:#475569;">35%</span></td>
-              <td>99%</td><td>97%</td><td>87%</td>
+              <td>99%</td><td>97%</td><td>87%</td><td>—</td>
             </tr>
             <tr>
               <td>กระจกข้าง (Side Window)</td>
               <td><span class="film-code">NCP-20-SD</span></td>
               <td><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
-              <td>99%</td><td>97%</td><td>87%</td>
+              <td>99%</td><td>97%</td><td>87%</td><td>—</td>
             </tr>
             <tr>
               <td>กระจกหลัง (Rear Window)</td>
               <td><span class="film-code">NCP-20-RW</span></td>
               <td><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
-              <td>99%</td><td>97%</td><td>87%</td>
+              <td>99%</td><td>97%</td><td>87%</td><td>—</td>
             </tr>
             <tr>
               <td>กระจกหลัง (Rear Window)</td>
               <td><span class="film-code">NCP-15-RW</span></td>
               <td><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
-              <td>99%</td><td>97%</td><td>87%</td>
+              <td>99%</td><td>97%</td><td>87%</td><td>—</td>
             </tr>
             <tr>
               <td>กระจกหน้าต่างบน (Sunroof)</td>
               <td><span class="film-code">NCP-15-SR</span></td>
               <td><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
-              <td>99%</td><td>97%</td><td>87%</td>
+              <td>99%</td><td>97%</td><td>87%</td><td>—</td>
             </tr>
           </tbody>
         </table>
@@ -495,8 +513,23 @@
   </footer>
 
 <script>
-(function() {
+(async function() {
+  if (typeof cfSync !== 'undefined') await cfSync.initSync();
   var KEY = 'rs_film_plus';
+  /* patch TSER into existing film-code records that were saved before this field existed */
+  (function() {
+    var TSER = {'NANOCMPLUS80':'71.8%','NANOCMPLUS60':'68.0%','NANOCMPLUS40':'62.5%'};
+    function normCode(s) { return (s||'').toUpperCase().replace(/[\s\-_]+/g,''); }
+    try {
+      var raw = localStorage.getItem(KEY); if (!raw) return;
+      var d = JSON.parse(raw); if (!d||!d.filmCodes) return;
+      var changed = false;
+      d.filmCodes.forEach(function(r) {
+        if (!r.tser) { var t = TSER[normCode(r.code)]; if (t) { r.tser = t; changed = true; } }
+      });
+      if (changed) localStorage.setItem(KEY, JSON.stringify(d));
+    } catch(e) {}
+  })();
   function esc(s) { var d=document.createElement('div');d.textContent=String(s||'');return d.innerHTML; }
   function el(id) { return document.getElementById(id); }
   try {
@@ -535,6 +568,7 @@
           '<td>'+esc(r.uv)+'</td>' +
           '<td>'+esc(r.ir)+'</td>' +
           '<td>'+esc(r.heat)+'</td>' +
+          '<td>'+esc(r.tser||'—')+'</td>' +
         '</tr>';
       }).join('');
     }

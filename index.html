@@ -1226,7 +1226,7 @@
     .rvmmeta{font-size:.85rem;color:rgba(255,255,255,.55);}
     .rvmmeta span{color:rgba(255,255,255,.8);font-weight:600;}
     .review-card{cursor:pointer;transition:transform .18s,box-shadow .18s;}
-    .review-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,180,216,.18);}
+    .review-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,119,182,.18);}
   </style>
   <!-- SEO Loader: applies dynamic title + Schema.org JSON-LD from admin settings -->
   <script>
@@ -1313,6 +1313,7 @@
     } catch(e){}
   })();
   </script>
+  <script src="js/cf-sync.js"></script>
 </head>
 <body>
 
@@ -1409,7 +1410,7 @@
     <a href="#branches" onclick="closeMobile()">สาขาติดตั้ง</a>
     <a href="reviews.html" onclick="closeMobile()">รีวิว</a>
     <a href="articles.html" onclick="closeMobile()">บทความ</a>
-    <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" onclick="closeMobile()" style="color: var(--cyan); font-weight: 700;">จองคิวเข้ารับบริการ</a>
+    <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec" target="_blank" rel="noopener noreferrer" onclick="closeMobile()" style="color: var(--gold); font-weight: 700;">จองคิวเข้ารับบริการ</a>
   </div>
 
   <main id="main-content">
@@ -2235,12 +2236,14 @@
 
   <!-- ===== DYNAMIC CONTENT LOADER ===== -->
   <script>
-  (function() {
+  (async function() {
     'use strict';
     function parseLS(k, fb) { try { return JSON.parse(localStorage.getItem(k) || 'null') || fb; } catch { return fb; } }
     function esc(s) {
       const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
     }
+
+    if (typeof cfSync !== 'undefined') await cfSync.initSync();
 
     /* ── HOMEPAGE CONFIG ── */
     (function applyHomepage() {
@@ -2403,9 +2406,11 @@
       grid.innerHTML = active.map(b => {
         const hqClass  = b.isHq ? ' hq' : '';
         const hqBadge  = b.isHq ? '<span class="branch-hq-badge">สำนักงานใหญ่</span>' : '';
-        const mapContent = b.img
-          ? `<img src="${esc(b.img)}" alt="${esc(b.name)}" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />${hqBadge}`
-          : `<span style="font-size:2.4rem;">${esc(b.emoji||'🗺️')}</span>${hqBadge}`;
+        const mapContent = b.mapEmbed
+          ? `<iframe src="${esc(b.mapEmbed)}" width="100%" height="100%" style="border:none;display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="${esc(b.name)}"></iframe>${hqBadge}`
+          : b.img
+            ? `<img src="${esc(b.img)}" alt="${esc(b.name)}" width="400" height="110" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />${hqBadge}`
+            : `<span style="font-size:2.4rem;">${esc(b.emoji||'🗺️')}</span>${hqBadge}`;
         const mapsLink = b.maps ? `<a href="${esc(b.maps)}" target="_blank" rel="noopener noreferrer" class="branch-maps" style="display:inline-flex;align-items:center;gap:4px;"><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-map-pin"/></svg> ดูแผนที่ →</a>` : '';
         const telLink  = b.tel  ? `<div class="branch-tel">📞 <a href="tel:${esc(b.tel.replace(/[-\s]/g,''))}" style="color:inherit;">${esc(b.tel)}</a></div>` : '';
         return `<article class="branch-card${hqClass}">

@@ -1,2 +1,27 @@
 name = "rayshield-website"
 pages_build_output_dir = "."
+
+# ──────────────────────────────────────────────────────────────
+# Cloudflare KV — เก็บข้อมูล content (homepage, reviews, ฯลฯ)
+# สร้าง namespace ด้วย: wrangler kv namespace create RS_KV
+# แล้วเอา id มาใส่ด้านล่าง
+# ──────────────────────────────────────────────────────────────
+[[kv_namespaces]]
+binding = "RS_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+# ──────────────────────────────────────────────────────────────
+# Cloudflare R2 — เก็บรูปภาพ reviews
+# สร้าง bucket ด้วย: wrangler r2 bucket create rayshield-images
+# ──────────────────────────────────────────────────────────────
+[[r2_buckets]]
+binding = "RS_R2"
+bucket_name = "rayshield-images"
+
+# ──────────────────────────────────────────────────────────────
+# สำหรับ local dev เท่านั้น (wrangler pages dev .)
+# ADMIN_TOKEN ใน production ให้ตั้งใน Cloudflare Dashboard:
+#   Pages → rayshield-website → Settings → Environment variables
+# ──────────────────────────────────────────────────────────────
+[vars]
+ADMIN_TOKEN = "rayshield@2026"

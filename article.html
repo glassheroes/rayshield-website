@@ -183,6 +183,7 @@
       #lightbox-img { max-height: 70vh; }
     }
   </style>
+  <script src="js/cf-sync.js"></script>
 </head>
 <body>
 
@@ -219,6 +220,9 @@
     function escHtml(s) {
       return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
+
+    (async function() {
+    if (typeof cfSync !== 'undefined') await cfSync.initSync();
 
     const params    = new URLSearchParams(location.search);
     const idParam   = params.get('id');
@@ -269,6 +273,7 @@
         initLightbox();
       }
     }
+    })();
 
     // ── LIGHTBOX ──
     function initLightbox() {
