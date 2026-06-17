@@ -11,7 +11,7 @@
   <script>/* RS Visit Tracker */(function(){try{var K='rs_visits',today=new Date().toISOString().split('T')[0];var p=(location.pathname.split('/').pop()||'index').replace('.html','')||'index';var w=window.innerWidth,dv=w<768?'m':w<1024?'t':'d';var ref=document.referrer,r='d';if(ref){if(/google|bing|yahoo|baidu/i.test(ref))r='s';else if(/facebook|instagram|twitter|x\.com|line|tiktok/i.test(ref))r='sc';else r='o';}var a=JSON.parse(localStorage.getItem(K)||'[]');a.push({d:today,p:p,dv:dv,r:r});var cut=new Date();cut.setDate(cut.getDate()-93);localStorage.setItem(K,JSON.stringify(a.filter(function(v){return v.d>=cut.toISOString().split('T')[0];})));}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=optional" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -26,10 +26,13 @@
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Noto Sans Thai','Segoe UI', Arial, sans-serif;
+      font-family: 'Prompt','Segoe UI', Arial, sans-serif;
       background: #fff; color: var(--text);
       line-height: 1.6; min-height: 100vh;
     }
+    .ico { width: 20px; height: 20px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .ico-sm { width: 16px; height: 16px; }
+    .ico-xs { width: 14px; height: 14px; }
 
     /* ── NAVBAR ── */
     nav {
@@ -242,6 +245,10 @@
   <script src="js/cf-sync.js"></script>
 </head>
 <body>
+<svg style="display:none" aria-hidden="true">
+  <symbol id="ico-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="ico-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+</svg>
 
   <!-- ===== NAVBAR ===== -->
   <nav role="navigation" aria-label="เมนูหลัก">
@@ -343,9 +350,9 @@
         <a href="${articleUrl(featured)}" class="article-featured" style="display:grid;text-decoration:none;color:inherit;">
           ${thumbHtml(featured, 'article-thumb')}
           <div class="article-body">
-            <span class="featured-badge">⭐ บทความแนะนำ</span>
+            <span class="featured-badge"><svg class="ico ico-xs" aria-hidden="true" style="color:#f4a940;"><use href="#ico-star"></use></svg> บทความแนะนำ</span>
             <div class="article-meta">
-              <span>📅 ${escHtml(featured.updatedAt||featured.createdAt||'')}</span>
+              <span><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-calendar"></use></svg> ${escHtml(featured.updatedAt||featured.createdAt||'')}</span>
               <span class="dot"></span>
               <span>อ่าน ${escHtml(featured.time)} นาที</span>
             </div>
@@ -360,7 +367,7 @@
           <a class="article-card" href="${articleUrl(a)}" style="text-decoration:none;color:inherit;">
             ${thumbHtml(a)}
             <div class="article-body">
-              <div class="article-meta"><span>📅 ${escHtml(a.updatedAt||a.createdAt||'')}</span><span class="dot"></span><span>${escHtml(a.time)} นาที</span></div>
+              <div class="article-meta"><span><svg class="ico ico-xs" aria-hidden="true"><use href="#ico-calendar"></use></svg> ${escHtml(a.updatedAt||a.createdAt||'')}</span><span class="dot"></span><span>${escHtml(a.time)} นาที</span></div>
               <div class="article-title">${escHtml(a.title)}</div>
               <div class="article-excerpt">${escHtml(a.excerpt)}</div>
               <span class="article-readmore">อ่านต่อ →</span>

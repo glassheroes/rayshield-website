@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=optional" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <title>รีวิวลูกค้า | Ray-Shield ฟิล์มกรองแสง</title>
 
   <script>/* RS Tag Loader */(function(){try{var c=JSON.parse(localStorage.getItem('rs_site_tags')||'{}'),h=document.head;function sc(src,code){var s=document.createElement('script');if(src){s.src=src;s.async=true;}if(code)s.textContent=code;h.appendChild(s);}function mt(n,v,p){if(!v)return;var e=document.querySelector(p?'meta[property="'+n+'"]':'meta[name="'+n+'"]');if(!e){e=document.createElement('meta');if(p)e.setAttribute('property',n);else e.setAttribute('name',n);h.appendChild(e);}e.setAttribute('content',v);}if(c.meta){mt('description',c.meta.description);mt('keywords',c.meta.keywords);}if(c.gtm&&c.gtm.enabled&&c.gtm.id){sc(null,'(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","'+c.gtm.id+'");');}if(c.ga4&&c.ga4.enabled&&c.ga4.id){sc('https://www.googletagmanager.com/gtag/js?id='+c.ga4.id);sc(null,'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","'+c.ga4.id+'");');}if(c.fbpixel&&c.fbpixel.enabled&&c.fbpixel.id){sc(null,'!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","'+c.fbpixel.id+'");fbq("track","PageView");');}if(c.customHead){var d=document.createElement('div');d.innerHTML=c.customHead;while(d.firstChild)h.appendChild(d.firstChild);}}catch(e){}})();</script>
@@ -19,7 +19,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans Thai','Segoe UI',Arial,sans-serif; color: #1E293B; background: #fff; overflow-x: hidden; }
+    body { font-family: 'Prompt','Segoe UI',Arial,sans-serif; color: #1E293B; background: #fff; overflow-x: hidden; }
     img { max-width: 100%; height: auto; display: block; }
     a { text-decoration: none; color: inherit; }
 
@@ -29,6 +29,9 @@
       --text: #2c2c54; --muted: #6b7280; --radius: 12px;
       --shadow: 0 4px 24px rgba(0,0,0,.10); --shadow-lg: 0 8px 40px rgba(0,0,0,.18);
     }
+    .ico { width: 20px; height: 20px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .ico-sm { width: 16px; height: 16px; }
+    .ico-xs { width: 14px; height: 14px; }
 
     /* ===== NAVBAR ===== */
     #navbar {
@@ -479,6 +482,13 @@
   <script src="js/cf-sync.js"></script>
 </head>
 <body>
+<svg style="display:none" aria-hidden="true">
+  <symbol id="ico-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="ico-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="ico-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.36 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+</svg>
 
   <!-- ===== NAVBAR ===== -->
   <nav id="navbar" role="navigation" aria-label="เมนูหลัก">
@@ -519,7 +529,7 @@
   <!-- ===== HERO ===== -->
   <section class="rv-hero" aria-labelledby="rv-hero-title">
     <div class="container">
-      <div class="rv-hero-eyebrow">⭐ รีวิวจากลูกค้าจริง · ไม่มีการปลอมแปลง</div>
+      <div class="rv-hero-eyebrow"><svg class="ico ico-xs" aria-hidden="true" style="color:#f4a940;"><use href="#ico-star"></use></svg> รีวิวจากลูกค้าจริง · ไม่มีการปลอมแปลง</div>
       <h1 id="rv-hero-title">เสียงจากลูกค้า<br><span>Ray-Shield</span></h1>
       <p class="rv-hero-sub">ลูกค้ากว่า 10,000 คัน เลือกไว้วางใจ Ray-Shield ด้วยฟิล์ม Nano Ceramic คุณภาพสูงสุด</p>
     </div>
@@ -547,9 +557,9 @@
         </div>
         <!-- Sort -->
         <select class="sort-select" id="sortSelect" onchange="renderReviews()">
-          <option value="featured">📌 รีวิวแนะนำก่อน</option>
-          <option value="newest">🕐 ล่าสุดก่อน</option>
-          <option value="stars">⭐ ดาวมากสุด</option>
+          <option value="featured">รีวิวแนะนำก่อน</option>
+          <option value="newest">ล่าสุดก่อน</option>
+          <option value="stars">ดาวมากสุด</option>
         </select>
       </div>
     </div>
@@ -565,7 +575,7 @@
         <!-- JS rendered -->
       </div>
       <div id="noMatch">
-        <div class="ni">🔍</div>
+        <div class="ni"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;opacity:.35;"><use href="#ico-search"></use></svg></div>
         <p>ไม่พบรีวิวที่ตรงกับตัวกรองที่เลือก</p>
       </div>
     </div>
@@ -579,10 +589,10 @@
       <div class="rv-cta-btns">
         <a href="https://script.google.com/macros/s/AKfycbz1523shYzoXMoOgG-NWt_k_bPu7puya3Qm2jCOmW80EIvXL6JiFBEeyH87IAsrpUvX/exec"
            target="_blank" rel="noopener noreferrer" class="btn-primary-lg">
-          📅 จองคิวออนไลน์ ฟรี
+          <svg class="ico ico-xs" aria-hidden="true"><use href="#ico-calendar"></use></svg> จองคิวออนไลน์ ฟรี
         </a>
         <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer" class="btn-outline-lg">
-          💬 สอบถามผ่าน Line
+          <svg class="ico ico-xs" aria-hidden="true"><use href="#ico-chat"></use></svg> สอบถามผ่าน Line
         </a>
       </div>
     </div>
@@ -598,8 +608,8 @@
           </div>
           <p>ฟิล์มกรองแสงรถยนต์คุณภาพสูง ด้วยเทคโนโลยี Nano Ceramic ปกป้องคุณและรถยนต์</p>
           <div class="footer-socials">
-            <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer" class="social-btn">💬</a>
-            <a href="tel:029435900" class="social-btn">📞</a>
+            <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LINE @glassheroes"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><use href="#ico-chat"></use></svg></a>
+            <a href="tel:029435900" class="social-btn" aria-label="โทร 02-943-5900"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><use href="#ico-phone"></use></svg></a>
           </div>
         </div>
         <div class="footer-col">
@@ -653,7 +663,7 @@
   </div>
 
   <a href="https://line.me/ti/p/~@glassheroes" target="_blank" rel="noopener noreferrer"
-     class="float-line" aria-label="ติดต่อผ่าน Line">💬</a>
+     class="float-line" aria-label="ติดต่อผ่าน Line"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><use href="#ico-chat"></use></svg></a>
   <button id="scrollTop" aria-label="กลับขึ้นด้านบน">▲</button>
 
   <!-- ===== JAVASCRIPT ===== -->

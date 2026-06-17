@@ -12,7 +12,7 @@
   <meta property="og:image" content="https://rayshield-website.pages.dev/images/nano-ceramic.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=optional" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -30,7 +30,7 @@
       --shadow-lg: 0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.10);
       --radius: 14px;
     }
-    body { font-family: 'Noto Sans Thai','Segoe UI',Arial,sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+    body { font-family: 'Prompt','Segoe UI',Arial,sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
@@ -254,6 +254,22 @@
     }
     footer p { font-size: 0.82rem; color: #94A3B8; }
     footer a { color: var(--blue); font-weight: 600; }
+
+    /* ── Mobile: Film Codes → Card layout ── */
+    @media (max-width: 639px) {
+      .codes-table-wrap { overflow-x: unset; }
+      .codes-table thead { display: none; }
+      .codes-table, .codes-table tbody, .codes-table tr, .codes-table td { display: block; width: 100%; }
+      .codes-table { box-shadow: none; border-radius: 0; background: transparent; }
+      .codes-table tr { margin-bottom: 16px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #fff; }
+      .codes-table tbody tr:hover td { background: transparent; }
+      .codes-table td { padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); text-align: right; background: #fff; }
+      .codes-table td:last-child { border-bottom: none; }
+      .codes-table td::before { content: attr(data-label); font-weight: 600; color: var(--navy); text-align: left; flex-shrink: 0; font-size: 0.82rem; }
+      .codes-table td:first-child { background: var(--navy) !important; color: #fff; font-weight: 700; font-size: 0.9rem; justify-content: center; text-align: center; padding: 12px 16px; border-bottom: none; }
+      .codes-table td:first-child::before { display: none; }
+      .codes-table td:not(:first-child) { text-align: right; }
+    }
   </style>
   <script src="js/cf-sync.js"></script>
 </head>
@@ -460,39 +476,39 @@
           <tbody id="filmCodesBody">
             <tr>
               <td>กระจกหน้า (Windshield)</td>
-              <td><span class="film-code">NC-70-WS</span></td>
-              <td><span class="vlt-badge" style="background:rgba(0,119,182,0.08);color:#0077B6;">70%</span></td>
-              <td>99%</td><td>95%</td><td>86.6%</td><td>—</td>
+              <td data-label="รหัสฟิล์ม"><span class="film-code">NC-70-WS</span></td>
+              <td data-label="VLT%"><span class="vlt-badge" style="background:rgba(0,119,182,0.08);color:#0077B6;">70%</span></td>
+              <td data-label="UV Reject">99%</td><td data-label="IR Reject">95%</td><td data-label="Heat Reject">86.6%</td><td data-label="TSER">—</td>
             </tr>
             <tr>
               <td>กระจกข้าง (Side Window)</td>
-              <td><span class="film-code">NC-35-SD</span></td>
-              <td><span class="vlt-badge" style="background:rgba(100,116,139,0.1);color:#475569;">35%</span></td>
-              <td>99%</td><td>95%</td><td>86.6%</td><td>—</td>
+              <td data-label="รหัสฟิล์ม"><span class="film-code">NC-35-SD</span></td>
+              <td data-label="VLT%"><span class="vlt-badge" style="background:rgba(100,116,139,0.1);color:#475569;">35%</span></td>
+              <td data-label="UV Reject">99%</td><td data-label="IR Reject">95%</td><td data-label="Heat Reject">86.6%</td><td data-label="TSER">—</td>
             </tr>
             <tr>
               <td>กระจกข้าง (Side Window)</td>
-              <td><span class="film-code">NC-20-SD</span></td>
-              <td><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
-              <td>99%</td><td>95%</td><td>86.6%</td><td>—</td>
+              <td data-label="รหัสฟิล์ม"><span class="film-code">NC-20-SD</span></td>
+              <td data-label="VLT%"><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
+              <td data-label="UV Reject">99%</td><td data-label="IR Reject">95%</td><td data-label="Heat Reject">86.6%</td><td data-label="TSER">—</td>
             </tr>
             <tr>
               <td>กระจกหลัง (Rear Window)</td>
-              <td><span class="film-code">NC-20-RW</span></td>
-              <td><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
-              <td>99%</td><td>95%</td><td>86.6%</td><td>—</td>
+              <td data-label="รหัสฟิล์ม"><span class="film-code">NC-20-RW</span></td>
+              <td data-label="VLT%"><span class="vlt-badge" style="background:rgba(71,85,105,0.12);color:#334155;">20%</span></td>
+              <td data-label="UV Reject">99%</td><td data-label="IR Reject">95%</td><td data-label="Heat Reject">86.6%</td><td data-label="TSER">—</td>
             </tr>
             <tr>
               <td>กระจกหลัง (Rear Window)</td>
-              <td><span class="film-code">NC-15-RW</span></td>
-              <td><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
-              <td>99%</td><td>95%</td><td>86.6%</td><td>—</td>
+              <td data-label="รหัสฟิล์ม"><span class="film-code">NC-15-RW</span></td>
+              <td data-label="VLT%"><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
+              <td data-label="UV Reject">99%</td><td data-label="IR Reject">95%</td><td data-label="Heat Reject">86.6%</td><td data-label="TSER">—</td>
             </tr>
             <tr>
               <td>กระจกหน้าต่างบน (Sunroof)</td>
-              <td><span class="film-code">NC-15-SR</span></td>
-              <td><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
-              <td>99%</td><td>95%</td><td>86.6%</td><td>—</td>
+              <td data-label="รหัสฟิล์ม"><span class="film-code">NC-15-SR</span></td>
+              <td data-label="VLT%"><span class="vlt-badge" style="background:rgba(30,41,59,0.12);color:#1e293b;">15%</span></td>
+              <td data-label="UV Reject">99%</td><td data-label="IR Reject">95%</td><td data-label="Heat Reject">86.6%</td><td data-label="TSER">—</td>
             </tr>
           </tbody>
         </table>
@@ -586,12 +602,12 @@
       el('filmCodesBody').innerHTML = data.filmCodes.map(function(r) {
         return '<tr>' +
           '<td>'+esc(r.position)+'</td>' +
-          '<td><span class="film-code">'+esc(r.code)+'</span></td>' +
-          '<td>'+esc(r.vlt)+'</td>' +
-          '<td>'+esc(r.uv)+'</td>' +
-          '<td>'+esc(r.ir)+'</td>' +
-          '<td>'+esc(r.heat)+'</td>' +
-          '<td>'+esc(r.tser||'—')+'</td>' +
+          '<td data-label="รหัสฟิล์ม"><span class="film-code">'+esc(r.code)+'</span></td>' +
+          '<td data-label="VLT%">'+esc(r.vlt)+'</td>' +
+          '<td data-label="UV Reject">'+esc(r.uv)+'</td>' +
+          '<td data-label="IR Reject">'+esc(r.ir)+'</td>' +
+          '<td data-label="Heat Reject">'+esc(r.heat)+'</td>' +
+          '<td data-label="TSER">'+esc(r.tser||'—')+'</td>' +
         '</tr>';
       }).join('');
     }
